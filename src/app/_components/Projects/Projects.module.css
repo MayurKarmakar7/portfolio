@@ -1,0 +1,71 @@
+.cardContainer {
+  z-index: -9;
+  /* transform: rotate(-45deg); */
+  /* position: absolute; */
+  display: block;
+  overflow: hidden;
+  overflow: hidden;
+  background: rgb(195, 34, 132);
+  background: -webkit-repeating-linear-gradient(
+    66deg,
+    rgba(195, 34, 132, 1) 0%,
+    rgba(253, 247, 45, 1) 100%
+  );
+  /* background-size: 200% auto; */
+  /* filter: blur(2px);
+  opacity: 0.5;
+  animation: rotate 3s linear infinite; */
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.image {
+  right: -9px;
+  top: -68px;
+  padding: 2px 2px;
+}
+
+.imageBorder {
+  animation: fadeOutIn 3s linear infinite;
+}
+
+@keyframes fadeOutIn {
+  0% {
+    opacity: 0.1;
+  }
+
+  25% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  75% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.borderGlow {
+  box-shadow:
+    inset 0 0 20px #fff,
+    inset 10px 0 40px #f0f,
+    inset -10px 0 40px #0ff,
+    inset 10px 0 150px #f0f,
+    inset -10px 0 150px #0ff,
+    0 0 20px #fff,
+    -5px 0 40px #f0f,
+    5px 0 40px #0ff;
+}
