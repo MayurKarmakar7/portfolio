@@ -1,26 +1,22 @@
 "use client";
-import { gsap, Power2 } from "gsap";
+import gsap, { Power3 } from "gsap";
 import { NextPage } from "next";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import BesecureLogo from "../../../assets/images/bsecurelogo.png";
 import Carelogiq from "../../../assets/images/carelogiq.png";
 import TextHeaders from "../textHeaders/textHeaders";
 import "./Experience.module.css";
 
-type TechnologyIconProps = {
-  imageUrl: string;
-};
-
 type ExperienceDescriptionProps = {
   header: string;
   responsibilites: string[];
   footer: string;
+  imageUrl: string;
+  name: string;
 };
 
 const Experience: NextPage = (): JSX.Element => {
   const dividerRef = useRef<HTMLDivElement | null>(null);
-  const images: string[] = [BesecureLogo.src, Carelogiq.src];
-  const textRef = useRef<HTMLParagraphElement | null>(null);
   const experienceDescription: ExperienceDescriptionProps[] = [
     {
       header:
@@ -33,6 +29,8 @@ const Experience: NextPage = (): JSX.Element => {
         "Implemented features to detect and safeguard online assessments from cheating",
         "Managed time-based exam windows",
       ],
+      imageUrl: BesecureLogo.src,
+      name: "BSecure",
       footer:
         "In my 2years at Beyond Exam, I was a team member where I leveraged my communication skills to communicate, gather, and convey my thoughts to and from the offshore team members and drove the concept of this featureful Web-based Edtech software to release.",
     },
@@ -46,96 +44,111 @@ const Experience: NextPage = (): JSX.Element => {
         "Fixed app crashes on Android and iOS devices",
         "Added page scrolling for form fields on Ant Design (antd) when validation errors occur",
       ],
+      name: "CarelogiQ",
+      imageUrl: Carelogiq.src,
       footer: "",
     },
   ];
-  const experienceItemsAndProps = {
-    beyondExamd: {
-      imageRef: useRef<HTMLElement | null>(null),
-      markerRef: useRef<HTMLElement | null>(null),
-      descRef: useRef<HTMLElement | null>(null),
-    },
-    caregem: {
-      imageRef: useRef<HTMLElement | null>(null),
-      markerRef: useRef<HTMLElement | null>(null),
-      descRef: useRef<HTMLElement | null>(null),
-    },
-  };
 
   useEffect(() => {
-    const tl = gsap.timeline();
-    tl.to(dividerRef.current, {
-      height: "500px",
-      duration: 1,
-      ease: Power2.easeInOut,
-    })
-      .to(
-        dividerRef.current,
-        {
-          opacity: 0,
-          duration: 0.1,
+    const ctx = gsap.context(() => {
+      gsap.from("#header", {
+        duration: 0.3,
+        text: "",
+        scrollTrigger: {
+          trigger: dividerRef.current,
+          start: "-=70",
+          end: "+=20",
+          scrub: 1,
         },
-        "-=0.5",
-      )
-      .to(
-        dividerRef.current,
-        {
-          height: "500px",
-          opacity: 1,
-          duration: 0.1,
+      });
+      gsap.from("#BSecure", {
+        ease: Power3.easeIn,
+        scrollTrigger: {
+          trigger: dividerRef.current,
+          start: "-=70",
+          end: "+=20",
+          scrub: 1,
         },
-        "-=0.1",
-      );
-
-    const { beyondExamd, caregem } = experienceItemsAndProps;
-    tl.to(beyondExamd.markerRef.current, {
-      width: "50px",
-      duration: 1,
-      top: "10%",
-      ease: Power2.easeInOut,
-    });
-    tl.to(caregem.markerRef.current, {
-      width: "50px",
-      duration: 1,
-      top: "80%",
-      ease: Power2.easeInOut,
-    });
-    tl.to(beyondExamd.descRef.current, {
-      width: "50px",
-      duration: 1,
-      top: "10%",
-      ease: Power2.easeInOut,
-    });
+        scale: 0,
+      });
+      gsap.from("#CarelogiQ", {
+        ease: Power3.easeIn,
+        scrollTrigger: {
+          trigger: dividerRef.current,
+          start: "-=70",
+          end: "+=20",
+          scrub: 1,
+        },
+        scale: 0,
+      });
+    }, dividerRef);
+    return () => ctx.revert();
   }, []);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      let timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: textRef.current,
-        },
-      });
-      timeline.to(textRef.current, {
-        scrollTrigger: {
-          trigger: textRef.current,
-        },
-        rotateY: 360,
-        duration: 5,
-        // y: 200,
-        // repeat: -1,
-      });
-    });
-    return () => ctx.clear();
-  });
+  const formatDescription = (
+    header: string,
+    responsibilites: string[],
+    footer: string,
+    index: number,
+    imageUrl: string,
+    name: string,
+  ) => {
+    return (
+      <div
+        id={name}
+        className="h-3/5 w-full rounded-2xl border-[1px] border-solid border-white border-opacity-10 bg-gradient-to-b from-black/40 to-black/20 py-4 text-center shadow-[0_0_20px_10px_rgba(0,0,0,0.75)] backdrop-blur-lg"
+      >
+        <div className="flex h-full flex-col items-center gap-6 px-3 md:w-full md:flex-row md:justify-center">
+          <img
+            src={imageUrl}
+            alt="!IMG"
+            className="mx-auto my-auto h-32 w-auto"
+          />
+          <div
+            className="flex h-3/5 w-full flex-col items-start gap-2"
+            key={index}
+          >
+            <p className="break-before-all text-left text-base">{header}</p>
+            <div className="flex h-full flex-col items-start gap-1">
+              <p className="text-base font-semibold">Key Responsibilities</p>
+              <ul className="list-outside list-disc">
+                {responsibilites.map((item: string) => (
+                  <li className="ml-4 list-item break-before-all text-start">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {footer && (
+              <p className="break-before-all text-left text-base">{footer}</p>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  };
 
-  const experience = experienceDescription[0] as ExperienceDescriptionProps;
+  const experiences = experienceDescription;
 
   return (
     <div
-      className="mt-24 flex h-full w-full flex-col items-center justify-center gap-16"
+      className="flex h-full w-full flex-col items-center justify-center gap-8"
       ref={(el) => (dividerRef.current = el)}
     >
       <TextHeaders>Experiences</TextHeaders>
+      <div className="flex h-full flex-col items-center gap-8 px-4 pt-8">
+        {experiences.map((item: ExperienceDescriptionProps, index: number) => {
+          return formatDescription(
+            item.header,
+            item.responsibilites,
+            item.footer,
+            index,
+            item.imageUrl,
+            item.name,
+          );
+        })}
+      </div>
     </div>
   );
 };

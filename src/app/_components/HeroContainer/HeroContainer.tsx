@@ -1,9 +1,8 @@
 "use client";
 
+import { gsap } from "gsap";
 import { NextPage } from "next";
-import { PropsWithChildren, useEffect, useLayoutEffect, useRef } from "react";
-import { gsap, Power3 } from "gsap";
-import selector from "./HeroContainer.module.css";
+import { PropsWithChildren, useEffect, useRef } from "react";
 
 type CombinedCardItemProps = PropsWithChildren;
 
@@ -34,9 +33,7 @@ const HeroContainer: NextPage = (): JSX.Element => {
     return ele;
   };
   return (
-    <div
-      className="relative flex min-h-screen w-screen flex-row flex-wrap items-center justify-center gap-x-5 gap-y-8 p-8"
-    >
+    <div className="relative flex min-h-screen w-screen flex-row flex-wrap items-center justify-center gap-x-5 gap-y-8 p-8">
       {getCards()}
     </div>
   );

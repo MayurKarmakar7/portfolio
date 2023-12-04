@@ -30,22 +30,22 @@ const ContactForm: NextPage = (): JSX.Element => {
   };
 
   return (
-    <div className="flex h-full w-4/5 gap-2">
-      <form
-        onSubmit={form.onSubmit((values) => handleAddVisitor(values))}
-        className="w-full"
-      >
+    <form
+      onSubmit={form.onSubmit((values) => handleAddVisitor(values))}
+      className="w-full"
+    >
+      <div className="flex h-full w-full flex-col items-center justify-center gap-5 px-24 py-4 text-left">
         <TextInput
           withAsterisk
           label="Name"
           placeholder="ex Jhon Doe"
-          className=""
+          className="w-full"
           {...form.getInputProps("name")}
           styles={{
             label: {
               fontSize: "1.5rem",
               color: "white",
-              textShadow: "-15px 5px 20px #ced0d3",
+              textAlign: "left",
             },
             input: {
               borderRadius: 25,
@@ -58,6 +58,7 @@ const ContactForm: NextPage = (): JSX.Element => {
           withAsterisk
           label="Email"
           placeholder="your@email.com"
+          className="w-full"
           {...form.getInputProps("email")}
           styles={{
             root: {
@@ -66,7 +67,7 @@ const ContactForm: NextPage = (): JSX.Element => {
             label: {
               fontSize: "1.5rem",
               color: "white",
-              textShadow: "-15px 5px 20px #ced0d3",
+              textAlign: "left",
             },
             input: {
               borderRadius: 25,
@@ -79,6 +80,7 @@ const ContactForm: NextPage = (): JSX.Element => {
           {...form.getInputProps("message")}
           maxRows={12}
           minRows={10}
+          className="w-full"
           styles={{
             input: {
               borderRadius: 12,
@@ -87,25 +89,27 @@ const ContactForm: NextPage = (): JSX.Element => {
             label: {
               fontSize: "1.5rem",
               color: "white",
-              textShadow: "-15px 5px 20px #ced0d3",
+              textAlign: "left",
             },
           }}
         />
         <div className="mt-4 flex w-full items-center justify-center">
           <Button
             type="submit"
+            variant="gradient"
+            loading={addVisitor.isLoading}
+            bg={"blue"}
             styles={{
               root: {
                 width: "100%",
-                borderRadius: 12,
               },
             }}
           >
             Submit
           </Button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 

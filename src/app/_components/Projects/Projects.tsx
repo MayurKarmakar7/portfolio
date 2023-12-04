@@ -32,7 +32,6 @@ const Projects: NextPage = (): JSX.Element => {
   const experienceItemRefs = Array.from({ length: 2 }, () =>
     useRef<HTMLDivElement | null>(null),
   );
-  const tl = gsap.timeline({ repeat: 3, repeatDelay: 1 });
   gsap.registerPlugin(ScrollTrigger);
   const projectDetails: ProjectDetails[] = [
     {
@@ -85,6 +84,16 @@ const Projects: NextPage = (): JSX.Element => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      gsap.from("#header", {
+        duration: 0.3,
+        text: "",
+        scrollTrigger: {
+          trigger: triggerContainerRef.current,
+          start: "-=70",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
       gsap.from("#expDetail", {
         scrollTrigger: {
           trigger: triggerContainerRef.current,
@@ -94,21 +103,22 @@ const Projects: NextPage = (): JSX.Element => {
         },
         stagger: { amount: 0.3 },
         scale: 0,
-        duration: 0.5,
+        duration: 0.2,
+        delay: 0.1,
       });
     }, triggerContainerRef);
     return () => ctx.revert();
   }, []);
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-28">
+    <div
+      className="flex h-full w-full flex-col items-center justify-center gap-28"
+      ref={(el) => {
+        triggerContainerRef.current = el;
+      }}
+    >
       <TextHeaders>Projects</TextHeaders>
-      <div
-        className="flex h-full flex-col items-center gap-24 md:w-full md:flex-row md:items-start md:justify-around md:gap-8"
-        ref={(el) => {
-          triggerContainerRef.current = el;
-        }}
-      >
+      <div className="flex h-full flex-col items-center gap-24 md:w-full md:flex-row md:items-start md:justify-around md:gap-8">
         {projectDetails.map((project: ProjectDetails, index: number) => (
           <div
             className="relative max-h-full w-4/5 flex-grow rounded"
@@ -125,7 +135,6 @@ const Projects: NextPage = (): JSX.Element => {
                     </div>
                   ),
                 )}
-                {/* <p className="text-2xl font-semibold">{project.name}</p> */}
                 <div className="flex h-full w-full flex-col items-start justify-start gap-4 px-2 pt-8">
                   <p className="w-full break-before-auto text-left text-base font-normal">
                     {project.header}
@@ -157,23 +166,6 @@ const Projects: NextPage = (): JSX.Element => {
           </div>
         ))}
       </div>
-    </div>
-  );
-};
-
-const ImageWithAnimatedBorder: NextPage<{ imageUrl: string }> = ({
-  imageUrl,
-}): JSX.Element => {
-  return (
-    <div className="absolute h-32 w-32 rounded-full">
-      <div
-        className={`absolute top-[-60px] z-50 flex h-32 w-32 rounded-full bg-sky-200 bg-gradient-to-t from-sky-200 via-sky-200 to-inherit shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] ${selector.imageBorder}`}
-      ></div>
-      <img
-        src={imageUrl}
-        alt=""
-        className={`absolute z-50 m-2 h-full w-full rounded-full ${selector.image} object-fill`}
-      />
     </div>
   );
 };

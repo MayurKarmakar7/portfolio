@@ -10,28 +10,33 @@ import {
   useEffect,
   useRef,
 } from "react";
+import { initFireCursorTrail } from "~/app/_utility/functions";
 import Antd from "../../../assets/logos/antd.png";
 import FramerMotion from "../../../assets/logos/framerMotion.png";
 import Mantine from "../../../assets/logos/mantine.png";
 import MaterialUI from "../../../assets/logos/materialui.png";
 import NextJS from "../../../assets/logos/nextjs.png";
-import ReactJS from "../../../assets/logos/react.png";
 import NodeJs from "../../../assets/logos/nodejs.png";
 import Prisma from "../../../assets/logos/prisma.png";
+import ReactJS from "../../../assets/logos/react.png";
 import ReactQuery from "../../../assets/logos/reactQuery.png";
 import Redux from "../../../assets/logos/redux.png";
 import Shadcn from "../../../assets/logos/shadcn.png";
 import SocketIo from "../../../assets/logos/socketIo.png";
 import Tailwind from "../../../assets/logos/tailwind.webp";
-import ThreeJs from "../../../assets/logos/threejs.png";
 import Trpc from "../../../assets/logos/trpc.png";
 import Webrtc from "../../../assets/logos/webrtc.png";
 import Zustand from "../../../assets/logos/zustand.png";
 import TextHeader from "../textHeaders/textHeaders";
 import classes from "./skills.module.css";
-import { initFireCursorTrail } from "~/app/_utility/functions";
 
 type ImageContainersProps = {
+  imageUrl: string;
+  id: string;
+};
+
+type SkillSet = {
+  name: string;
   imageUrl: string;
 };
 
@@ -39,84 +44,241 @@ type ImageContainersCombinedProps = ImageContainersProps &
   React.HTMLProps<HTMLDivElement>;
 
 const Skills: NextPage = (): JSX.Element => {
-  const heading = useRef<HTMLHeadingElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const cursorRef = useRef<HTMLDivElement | null>(null);
-  const skillSet: string[] = [
-    ReactJS.src,
-    NextJS.src,
-    Mantine.src,
-    FramerMotion.src,
-    Antd.src,
-    MaterialUI.src,
-    NodeJs.src,
-    Prisma.src,
-    ReactQuery.src,
-    Redux.src,
-    Shadcn.src,
-    SocketIo.src,
-    Tailwind.src,
-    ThreeJs.src,
-    Trpc.src,
-    Webrtc.src,
-    Zustand.src,
-  ];
+  gsap.registerPlugin(ScrollTrigger);
 
-  const imageRefs = skillSet.map((_) => useRef<HTMLImageElement | null>(null));
+  const skillsDetail: SkillSet[] = [
+    { name: "react", imageUrl: ReactJS.src },
+    { name: "next", imageUrl: NextJS.src },
+    { name: "mantine", imageUrl: Mantine.src },
+    { name: "framemotion", imageUrl: FramerMotion.src },
+    { name: "antd", imageUrl: Antd.src },
+    { name: "materialui", imageUrl: MaterialUI.src },
+    { name: "node", imageUrl: NodeJs.src },
+    { name: "prisma", imageUrl: Prisma.src },
+    { name: "reactquery", imageUrl: ReactQuery.src },
+    { name: "redux", imageUrl: Redux.src },
+    { name: "shadcn", imageUrl: Shadcn.src },
+    { name: "socketio", imageUrl: SocketIo.src },
+    { name: "tailwind", imageUrl: Tailwind.src },
+    { name: "trpc", imageUrl: Trpc.src },
+    { name: "webrtc", imageUrl: Webrtc.src },
+    { name: "zustand", imageUrl: Zustand.src },
+  ];
 
   useEffect(() => {
     if (cursorRef.current) {
       initFireCursorTrail(cursorRef.current);
     }
-    gsap.registerPlugin(ScrollTrigger);
 
-    gsap.fromTo(
-      heading.current,
-      {
-        x: -1000,
-        opacity: 0,
-      },
-      {
-        x: 0,
-        opacity: 1,
+    const ctx = gsap.context(() => {
+      gsap.from("#header", {
+        duration: 0.3,
+        text: "",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "-=70",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+
+      gsap.from("#materialui", {
+        scale: 0,
+        y: -100,
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "+=10",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+      gsap.from("#node", {
+        scale: 0,
+        x: 100,
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "+=10",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+      gsap.from("#shadcn", {
+        scale: 0,
+        y: 100,
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "+=10",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+      gsap.from("#redux", {
+        scale: 0,
+        x: -100,
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "+=10",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+      gsap.from("#react", {
+        scale: 0,
+        x: -100,
         duration: 1,
-        ease: Power3.easeIn,
-      },
-    );
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "+=10",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+      gsap.from("#next", {
+        scale: 0,
+        y: -100,
+        duration: 1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "+=10",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+      gsap.from("#mantine", {
+        scale: 0,
+        y: -100,
+        duration: 1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "+=10",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+      gsap.from("#framemotion", {
+        scale: 0,
+        y: -100,
+        duration: 1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "+=10",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+      gsap.from("#prisma", {
+        scale: 0,
+        x: -100,
+        duration: 1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "+=10",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+      gsap.from("#socketio", {
+        scale: 0,
+        x: -100,
+        duration: 1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "+=10",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+      gsap.from("#zustand", {
+        scale: 0,
+        x: -100,
+        duration: 1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "+=10",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+      gsap.from("#tailwind", {
+        scale: 0,
+        y: 100,
+        duration: 1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "+=10",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+      gsap.from("#trpc", {
+        scale: 0,
+        y: 100,
+        duration: 1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "+=10",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+      gsap.from("#webrtc", {
+        scale: 0,
+        y: 100,
+        duration: 1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "+=10",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+      gsap.from("#antd", {
+        scale: 0,
+        x: -100,
+        duration: 1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "+=10",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+      gsap.from("#reactquery", {
+        scale: 0,
+        x: -100,
+        duration: 1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "+=10",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+    }, containerRef);
 
-    imageRefs.forEach(
-      (ref: MutableRefObject<HTMLImageElement | null>, index: number) => {
-        if (ref.current) {
-          gsap.to(ref.current, {
-            // scrollTrigger: {
-            //   trigger: imageRef.current,
-            //   start: "top top",
-            //   end: "center bottom",
-            //   toggleActions: "restart pause reverse pause",
-            // },
-            delay: 0.2,
-            duration: 1,
-            stagger: 0.5,
-            y: function (i, elem, boxes) {
-              return index % 2 === 1 ? -80 : 80;
-            },
-            repeat: -1,
-            yoyo: true,
-          });
-        }
-      },
-    );
+    return () => ctx.revert();
   }, []);
 
   return (
-    <div className="flex h-full flex-col items-start justify-center gap-36">
-      <div ref={(el) => (cursorRef.current = el)} />
+    <div
+      className="my-24 flex h-full w-screen flex-col items-center justify-center gap-32"
+      ref={(el) => {
+        containerRef.current = el;
+      }}
+    >
       <TextHeader>Skills</TextHeader>
-      <div className="flex w-full flex-row flex-wrap justify-around gap-10">
-        {skillSet.map((imageUrl: string, index: number) => (
+      <div className="grid grid-cols-4 gap-12">
+        {skillsDetail.map((item: SkillSet, index: number) => (
           <ImageContainers
-            imageUrl={imageUrl}
-            ref={imageRefs[index]}
+            imageUrl={item.imageUrl}
             key={index}
+            id={item.name}
           />
         ))}
       </div>
@@ -126,12 +288,13 @@ const Skills: NextPage = (): JSX.Element => {
 
 const ImageContainers = forwardRef(
   (
-    { imageUrl, ...rest }: ImageContainersCombinedProps,
+    { imageUrl, id, ...rest }: ImageContainersCombinedProps,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
     return (
       <div
-        className={`h-32 w-32 overflow-hidden rounded-full ${classes.borderGlow}`}
+        className={`h-24 w-24 overflow-hidden rounded-full ${classes.borderGlow}`}
+        id={id}
         ref={ref}
       >
         <img className="h-full w-full object-cover" src={imageUrl} alt="!IMG" />

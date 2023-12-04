@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { NextPage } from "next";
+import { type NextPage } from "next";
 import { useEffect, useRef } from "react";
 import PythonDjango from "../../../assets/logos/pythonDjango.jpg";
 import ReactJS from "../../../assets/logos/reactJs.png";
@@ -16,6 +16,7 @@ type Certifications = {
 };
 
 const Certifications: NextPage = (): JSX.Element => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const certifications: Certifications[] = [
     {
       image: ReactJS.src,
@@ -30,19 +31,54 @@ const Certifications: NextPage = (): JSX.Element => {
       link: "https://www.udemy.com/certificate/UC-ZPNYJ3TO/",
     },
   ];
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from("#header", {
+        duration: 0.3,
+        text: "",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "-=70",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+      gsap.from("#box", {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "top center",
+          scrub: 1,
+        },
+        stagger: { amount: 0.3 },
+        opacity: 0,
+        duration: 0.1,
+      });
+    }, containerRef);
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-16">
+    <div
+      className="flex h-full w-full flex-col items-center justify-center gap-16 md:mt-48"
+      ref={(el) => {
+        containerRef.current = el;
+      }}
+    >
       <TextHeaders>Certifications</TextHeaders>
       <div className="flex h-full w-full items-center justify-center">
-        <div className="flex h-full w-full flex-col items-center justify-centre gap-48 md:flex-row md:gap-8">
-          {certifications.map((certificateDetails: Certifications) => (
-            <Container
-              image={certificateDetails.image}
-              issued={certificateDetails.issued}
-              certId={certificateDetails.certId}
-              link={certificateDetails.link}
-            />
-          ))}
+        <div className="justify-centre flex h-full w-full flex-col items-center gap-48 md:flex-row md:gap-8">
+          {certifications.map(
+            (certificateDetails: Certifications, index: number) => (
+              <Container
+                image={certificateDetails.image}
+                issued={certificateDetails.issued}
+                certId={certificateDetails.certId}
+                link={certificateDetails.link}
+              />
+            ),
+          )}
         </div>
       </div>
     </div>
@@ -56,7 +92,7 @@ const Container: NextPage<Certifications> = ({
   link,
 }): JSX.Element => {
   return (
-    <div className="h-4/5 w-full md:w-35 flex-grow rounded-md object-cover p-8">
+    <div className="md:w-35 h-4/5 w-full flex-grow rounded-md object-cover p-8">
       <CertificationItem
         image={image}
         issued={issued}
@@ -109,6 +145,7 @@ const CertificationItem: NextPage<Certifications> = ({
     <div
       className="flex h-3/5 w-full flex-row items-start justify-center gap-4"
       ref={(el) => (containerRef.current = el)}
+      id="box"
     >
       <img
         src={image}

@@ -9,6 +9,7 @@ import { TextPlugin } from "gsap/TextPlugin";
 // import SplitText from "gsap/src/SplitText";
 
 const Introduction: NextPage = (): JSX.Element => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
   const introDivRef = useRef<HTMLDivElement | null>(null);
   const textOneRef = useRef<HTMLParagraphElement | null>(null);
@@ -25,12 +26,18 @@ const Introduction: NextPage = (): JSX.Element => {
   };
 
   useEffect(() => {
-    // tl.from(imageRef.current, {
-    //   duration: 3,
-    //   x: -900,
-    // }).to(imageRef.current, {
-    //   x: 0,
-    // });
+    const ctx = gsap.context(() => {
+      gsap.from("#header", {
+        duration: 0.3,
+        text: "",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "-=70",
+          end: "+=20",
+          scrub: 1,
+        },
+      });
+    }, containerRef);
 
     const ele = textOneRef.current;
     if (ele) {
@@ -106,9 +113,15 @@ const Introduction: NextPage = (): JSX.Element => {
         console.log("err gsap", err);
       }
     }
+    return () => ctx.revert();
   }, []);
   return (
-    <div className="flex h-full w-full flex-col items-center justify-between gap-16">
+    <div
+      className="flex h-full w-full flex-col items-center justify-between gap-16 my-8"
+      ref={(el) => {
+        containerRef.current = el;
+      }}
+    >
       <TextHeader>About</TextHeader>
       <div className="flex h-full w-full flex-col items-center justify-center gap-10">
         <div className="flex h-full w-full place-items-center justify-center">

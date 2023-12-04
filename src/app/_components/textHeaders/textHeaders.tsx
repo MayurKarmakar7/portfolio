@@ -10,19 +10,19 @@ const TextHeader: React.ForwardRefRenderFunction<
   const containerRef = useRef<HTMLDivElement | null>(null);
   gsap.registerPlugin(TextPlugin);
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from("#header", {
-        duration: 3,
-        text: "",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "+=30",
-          end: "top center",
-          scrub: 1,
-        },
-      });
-    }, containerRef);
-    return () => ctx.revert();
+    // const ctx = gsap.context(() => {
+    //   gsap.from("#header", {
+    //     duration: 3,
+    //     text: "",
+    //     scrollTrigger: {
+    //       trigger: containerRef.current,
+    //       start: "-=40",
+    //       end: "+=20",
+    //       scrub: 1,
+    //     },
+    //   });
+    // }, containerRef);
+    // return () => ctx.revert();
   }, []);
   return (
     <div
