@@ -1,14 +1,9 @@
 import { NextPage } from "next";
 import { useEffect, useRef } from "react";
-import * as THREE from "three";
 import TextHeaders from "../textHeaders/textHeaders";
 import selector from "./Education.module.css";
 import EducationContainer from "./EducationContainer/EducationContainer";
 import gsap from "gsap";
-
-interface CustomObject3D extends THREE.Object3D {
-  degreesRotation?: number;
-}
 
 const Education: NextPage = (): JSX.Element => {
   const parentDivRef = useRef<HTMLDivElement | null>(null);

@@ -1,12 +1,12 @@
+import gsap from "gsap";
 import { NextPage } from "next";
-import TextHeaders from "../textHeaders/textHeaders";
-import ReactJS from "../../../assets/logos/reactJs.png";
+import { useEffect, useRef } from "react";
 import PythonDjango from "../../../assets/logos/pythonDjango.jpg";
+import ReactJS from "../../../assets/logos/reactJs.png";
 import Udemy from "../../../assets/logos/udemy.png";
-import { MouseEventHandler, useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import selector from "./Certification.module.css";
 import { LinkIcon } from "../Education/EducationContainer/Icons";
+import TextHeaders from "../textHeaders/textHeaders";
+import selector from "./Certification.module.css";
 
 type Certifications = {
   image: string;
@@ -78,7 +78,6 @@ const CertificationItem: NextPage<Certifications> = ({
   };
 
   useEffect(() => {
-    const x = gsap.utils.toArray(containerRef.current);
     gsap.utils.toArray(containerRef.current).forEach((card: any) => {
       if (frontRef.current && backRef.current) {
         gsap.set(card, {
