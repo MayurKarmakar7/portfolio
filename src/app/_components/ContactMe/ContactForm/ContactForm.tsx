@@ -21,7 +21,7 @@ const ContactForm: NextPage = (): JSX.Element => {
     },
   });
 
-  const handleAddVisitor = async (value: {
+  const handleAddVisitor = (value: {
     name: string;
     email: string;
     message: string;

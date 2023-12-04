@@ -7,6 +7,7 @@ import Udemy from "../../../assets/logos/udemy.png";
 import { LinkIcon } from "../Education/EducationContainer/Icons";
 import TextHeaders from "../textHeaders/textHeaders";
 import selector from "./Certification.module.css";
+import Image from "next/image";
 
 type Certifications = {
   image: string;
@@ -76,6 +77,7 @@ const Certifications: NextPage = (): JSX.Element => {
                 issued={certificateDetails.issued}
                 certId={certificateDetails.certId}
                 link={certificateDetails.link}
+                key={index}
               />
             ),
           )}
@@ -114,29 +116,31 @@ const CertificationItem: NextPage<Certifications> = ({
   };
 
   useEffect(() => {
+    /* eslint-disable */
     gsap.utils.toArray(containerRef.current).forEach((card: any) => {
       if (frontRef.current && backRef.current) {
-        gsap.set(card, {
+        gsap.set(card as gsap.TweenTarget, {
           transformStyle: "preserve-3d",
           transformPerspective: 700,
         });
 
         gsap.set(backRef.current, { rotationY: -180 });
 
-        const tl = gsap
+        const tl: gsap.core.Timeline = gsap
           .timeline({ paused: true })
           .to(frontRef.current, { duration: 1, rotationY: 180 })
           .to(backRef.current, { duration: 1, rotationY: 0 }, 0)
-          .to(card, { z: 50 }, 0)
-          .to(card, { z: 0 }, 0.5);
-        (card as HTMLElement).addEventListener("mouseenter", function () {
+          .to(card as gsap.TweenTarget, { z: 50 }, 0)
+          .to(card as gsap.TweenTarget, { z: 0 }, 0.5);
+        card.addEventListener("mouseenter", function () {
           tl.play();
         });
-        (card as HTMLElement).addEventListener("mouseleave", function () {
+        card.addEventListener("mouseleave", function () {
           tl.reverse();
         });
       }
     });
+    /* eslint-disable */
   }, []);
   const frontRef = useRef<HTMLImageElement | null>(null);
   const backRef = useRef<HTMLDivElement | null>(null);
@@ -147,7 +151,7 @@ const CertificationItem: NextPage<Certifications> = ({
       ref={(el) => (containerRef.current = el)}
       id="box"
     >
-      <img
+      <Image
         src={image}
         alt="react"
         className={`rounded-md ${selector.cardFront} h-2/5 w-2/5`}
@@ -157,7 +161,7 @@ const CertificationItem: NextPage<Certifications> = ({
         className={`flex h-2/5 w-2/5 flex-col items-center gap-2 ${selector.cardBack} py-8`}
         ref={(el) => (backRef.current = el)}
       >
-        <img
+        <Image
           src={Udemy.src}
           alt="udemy"
           className="h-28 w-44 rounded-md bg-transparent"

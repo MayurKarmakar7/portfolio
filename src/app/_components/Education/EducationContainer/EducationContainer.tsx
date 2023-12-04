@@ -16,7 +16,7 @@ type EducationDetail = {
 const EducationContainer: NextPage = (): JSX.Element => {
   const iconDimensions = { height: "2.5rem", width: "2.5rem" };
   const containerRef = useRef<HTMLDivElement | null>(null);
-  let tl = gsap.timeline({ defaults: { duration: 2, ease: "none" } });
+  const tl = gsap.timeline({ defaults: { duration: 2, ease: "none" } });
   const educationList: EducationDetail[] = [
     {
       image: TACT.src,

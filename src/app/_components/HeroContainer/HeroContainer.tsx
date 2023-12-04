@@ -21,7 +21,7 @@ const HeroContainer: NextPage = (): JSX.Element => {
   ];
 
   const getCards = (): JSX.Element[] => {
-    let len = tech.length;
+    const len = tech.length;
     const ele: JSX.Element[] = [];
     for (let i = 0; i < 27; i++) {
       if (i > len) {

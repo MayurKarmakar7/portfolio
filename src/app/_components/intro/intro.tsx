@@ -56,6 +56,7 @@ const Introduction: NextPage = (): JSX.Element => {
 
         if (numWords > 0) {
           for (let i = 0; i < numWords; i++) {
+            /* eslint-disable */
             tl.from(
               splitTxt.words[i] as any,
               {
@@ -66,6 +67,7 @@ const Introduction: NextPage = (): JSX.Element => {
               },
               Math.random() * 1.5,
             );
+            /* eslint-disable */
           }
         }
         tl.from(
@@ -78,7 +80,7 @@ const Introduction: NextPage = (): JSX.Element => {
           },
           0,
         );
-
+        /* eslint-disable */
         for (let i = 0; i < numWords; i++) {
           var z = randomNumber(-50, 50);
           tl.to(
@@ -86,6 +88,7 @@ const Introduction: NextPage = (): JSX.Element => {
             { z: z, opacity: rangeToPercent(z, -50, 50), duration: 0.5 },
             "pulse",
           );
+          /* eslint-disable */
         }
 
         tl.to(ele, { rotationX: -35, rotationY: 0, duration: 0.5 }, "pulse2");
@@ -94,7 +97,7 @@ const Introduction: NextPage = (): JSX.Element => {
         tl.to(ele, { rotationY: 0, rotationX: 0, duration: 0.5 }, "reset");
 
         tl.add("explode", "+=90");
-
+        /* eslint-disable */
         for (let i = 0; i < numWords; i++) {
           tl.to(
             splitTxt.words[i] as any,
@@ -109,6 +112,7 @@ const Introduction: NextPage = (): JSX.Element => {
             "explode+=" + Math.random() * 0.2,
           );
         }
+        /* eslint-disable */
       } catch (err) {
         console.log("err gsap", err);
       }
@@ -117,7 +121,7 @@ const Introduction: NextPage = (): JSX.Element => {
   }, []);
   return (
     <div
-      className="flex h-full w-full flex-col items-center justify-between gap-16 my-8"
+      className="my-8 flex h-full w-full flex-col items-center justify-between gap-16"
       ref={(el) => {
         containerRef.current = el;
       }}
