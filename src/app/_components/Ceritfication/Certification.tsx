@@ -151,7 +151,7 @@ const CertificationItem: NextPage<Certifications> = ({
       ref={(el) => (containerRef.current = el)}
       id="box"
     >
-      <Image
+      <img
         src={image}
         alt="react"
         className={`rounded-md ${selector.cardFront} h-2/5 w-2/5`}
@@ -161,7 +161,7 @@ const CertificationItem: NextPage<Certifications> = ({
         className={`flex h-2/5 w-2/5 flex-col items-center gap-2 ${selector.cardBack} py-8`}
         ref={(el) => (backRef.current = el)}
       >
-        <Image
+        <img
           src={Udemy.src}
           alt="udemy"
           className="h-28 w-44 rounded-md bg-transparent"

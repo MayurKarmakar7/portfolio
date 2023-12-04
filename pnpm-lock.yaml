@@ -47,9 +47,6 @@ dependencies:
   gsap:
     specifier: ^3.12.2
     version: 3.12.2
-  gsap-trial:
-    specifier: ^3.12.2
-    version: 3.12.2
   next:
     specifier: ^14.0.3
     version: 14.0.3(react-dom@18.2.0)(react@18.2.0)(sass@1.69.5)
@@ -71,6 +68,9 @@ dependencies:
   server-only:
     specifier: ^0.0.1
     version: 0.0.1
+  split-type:
+    specifier: ^0.3.4
+    version: 0.3.4
   superjson:
     specifier: ^2.2.1
     version: 2.2.1
@@ -2351,10 +2351,6 @@ packages:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
 
-  /gsap-trial@3.12.2:
-    resolution: {integrity: sha512-6oSqqRZB0jcJmCBmM8I6UECAAacZOn76r5/QOIOD4gewYxoWuecDt0A4oT5zAT1fhq40lWHYAgXfN9Kd8hWQcQ==}
-    dev: false
-
   /gsap@3.12.2:
     resolution: {integrity: sha512-EkYnpG8qHgYBFAwsgsGEqvT1WUidX0tt/ijepx7z8EUJHElykg91RvW1XbkT59T0gZzzszOpjQv7SE41XuIXyQ==}
     dev: false
@@ -3325,6 +3321,10 @@ packages:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
     deprecated: Please use @jridgewell/sourcemap-codec instead
     dev: true
+
+  /split-type@0.3.4:
+    resolution: {integrity: sha512-otEk9vnD8qwfLsk3Lx0gz+qRkNIJCx0mlyL47ImP/DjMuV39d75Lpfwjn9fHteDRz0aoOblSzQjSNT9+Sswxcg==}
+    dev: false
 
   /sqlstring@2.3.3:
     resolution: {integrity: sha512-qC9iz2FlN7DQl3+wjwn3802RTyjCx7sDvfQEXchwa6CWOx07/WVfh91gBmQ9fahw8snwGEWU3xGzOt4tFyHLxg==}

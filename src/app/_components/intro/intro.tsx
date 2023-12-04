@@ -1,11 +1,11 @@
 "use client";
 import gsap from "gsap";
-import SplitText from "gsap-trial/SplitText";
 import { NextPage } from "next";
 import { useEffect, useRef } from "react";
 import MayurLogo from "../../../assets/images/mayurLogo.jpg";
 import TextHeader from "../textHeaders/textHeaders";
 import { TextPlugin } from "gsap/TextPlugin";
+import SplitType from "split-type";
 // import SplitText from "gsap/src/SplitText";
 
 const Introduction: NextPage = (): JSX.Element => {
@@ -13,7 +13,7 @@ const Introduction: NextPage = (): JSX.Element => {
   const imageRef = useRef<HTMLImageElement | null>(null);
   const introDivRef = useRef<HTMLDivElement | null>(null);
   const textOneRef = useRef<HTMLParagraphElement | null>(null);
-  gsap.registerPlugin(SplitText, TextPlugin);
+  gsap.registerPlugin(TextPlugin);
   const textTl = gsap.timeline({ repeat: -1 });
   textTl.timeScale(2);
 
@@ -41,80 +41,82 @@ const Introduction: NextPage = (): JSX.Element => {
 
     const ele = textOneRef.current;
     if (ele) {
-      try {
-        const splitTxt = new SplitText(ele, { type: "words" });
-        const tl = gsap.timeline({ delay: 1, repeat: -1, repeatDelay: 15 });
-        const numWords = splitTxt.words.length;
-        if (ele) {
-          gsap.set(ele, {
-            transformPerspective: 600,
-            perspective: 300,
-            transformStyle: "preserve-3d",
-            autoAlpha: 1,
-          });
-        }
+      const splitTxt = new SplitType(ele, { types: "words" });
+      const tl = gsap.timeline({ delay: 1, repeat: -1, repeatDelay: 15 });
+      if (splitTxt.words) {
+        try {
+          const numWords = splitTxt.words.length;
+          if (ele) {
+            gsap.set(ele, {
+              transformPerspective: 600,
+              perspective: 300,
+              transformStyle: "preserve-3d",
+              autoAlpha: 1,
+            });
+          }
 
-        if (numWords > 0) {
+          if (numWords > 0) {
+            for (let i = 0; i < numWords; i++) {
+              /* eslint-disable */
+              tl.from(
+                splitTxt.words[i] as any,
+                {
+                  z: randomNumber(-500, 300),
+                  opacity: 0,
+                  rotationY: randomNumber(-40, 40),
+                  duration: 1.5,
+                },
+                Math.random() * 1.5,
+              );
+              /* eslint-disable */
+            }
+          }
+          tl.from(
+            ele,
+            {
+              rotationY: 180,
+              transformOrigin: "50% 75% 200",
+              ease: Power2.easeOut,
+              duration: tl.duration(),
+            },
+            0,
+          );
+          /* eslint-disable */
           for (let i = 0; i < numWords; i++) {
-            /* eslint-disable */
-            tl.from(
+            var z = randomNumber(-50, 50);
+            tl.to(
               splitTxt.words[i] as any,
-              {
-                z: randomNumber(-500, 300),
-                opacity: 0,
-                rotationY: randomNumber(-40, 40),
-                duration: 1.5,
-              },
-              Math.random() * 1.5,
+              { z: z, opacity: rangeToPercent(z, -50, 50), duration: 0.5 },
+              "pulse",
             );
             /* eslint-disable */
           }
-        }
-        tl.from(
-          ele,
-          {
-            rotationY: 180,
-            transformOrigin: "50% 75% 200",
-            ease: Power2.easeOut,
-            duration: tl.duration(),
-          },
-          0,
-        );
-        /* eslint-disable */
-        for (let i = 0; i < numWords; i++) {
-          var z = randomNumber(-50, 50);
-          tl.to(
-            splitTxt.words[i] as any,
-            { z: z, opacity: rangeToPercent(z, -50, 50), duration: 0.5 },
-            "pulse",
-          );
+
+          tl.to(ele, { rotationX: -35, rotationY: 0, duration: 0.5 }, "pulse2");
+
+          tl.to(splitTxt.words, { z: 0, opacity: 1, duration: 0.5 }, "reset");
+          tl.to(ele, { rotationY: 0, rotationX: 0, duration: 0.5 }, "reset");
+
+          tl.add("explode", "+=90");
           /* eslint-disable */
+          for (let i = 0; i < numWords; i++) {
+            tl.to(
+              splitTxt.words[i] as any,
+              {
+                z: randomNumber(100, 500),
+                duration: 0.6,
+                opacity: 0,
+                rotation: randomNumber(360, 720),
+                rotationX: randomNumber(-360, 360),
+                rotationY: randomNumber(-360, 360),
+              },
+              "explode+=" + Math.random() * 0.2,
+            );
+          }
+          /* eslint-disable */
+        } catch (err) {
+          console.log("err gsap", err);
         }
-
-        tl.to(ele, { rotationX: -35, rotationY: 0, duration: 0.5 }, "pulse2");
-
-        tl.to(splitTxt.words, { z: 0, opacity: 1, duration: 0.5 }, "reset");
-        tl.to(ele, { rotationY: 0, rotationX: 0, duration: 0.5 }, "reset");
-
-        tl.add("explode", "+=90");
-        /* eslint-disable */
-        for (let i = 0; i < numWords; i++) {
-          tl.to(
-            splitTxt.words[i] as any,
-            {
-              z: randomNumber(100, 500),
-              duration: 0.6,
-              opacity: 0,
-              rotation: randomNumber(360, 720),
-              rotationX: randomNumber(-360, 360),
-              rotationY: randomNumber(-360, 360),
-            },
-            "explode+=" + Math.random() * 0.2,
-          );
-        }
-        /* eslint-disable */
-      } catch (err) {
-        console.log("err gsap", err);
       }
     }
     return () => ctx.revert();
@@ -154,6 +156,7 @@ const Introduction: NextPage = (): JSX.Element => {
               width: "100%",
               visibility: "hidden",
             }}
+            id="text"
             ref={(el) => {
               textOneRef.current = el;
             }}
