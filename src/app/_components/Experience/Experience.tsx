@@ -16,7 +16,7 @@ type ExperienceDescriptionProps = {
 };
 
 const Experience: NextPage = (): JSX.Element => {
-  const dividerRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const experienceDescription: ExperienceDescriptionProps[] = [
     {
       header:
@@ -51,38 +51,29 @@ const Experience: NextPage = (): JSX.Element => {
   ];
 
   useEffect(() => {
+    const tl = gsap.timeline();
     const ctx = gsap.context(() => {
-      gsap.from("#header", {
-        duration: 0.3,
-        text: "",
-        scrollTrigger: {
-          trigger: dividerRef.current,
-          start: "-=70",
-          end: "+=20",
-          scrub: 1,
+      tl.fromTo(
+        "#experienceHeader",
+        {
+          duration: 0.3,
+          opacity: 0,
+          text: "",
         },
-      });
-      gsap.from("#BSecure", {
-        ease: Power3.easeIn,
-        scrollTrigger: {
-          trigger: dividerRef.current,
-          start: "-=70",
-          end: "+=20",
-          scrub: 1,
+        {
+          opacity: 1,
+          duration: 0.5,
+          text: "Experiences",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top-=270",
+            end: "top-=200",
+            scrub: 1,
+            markers: true,
+          },
         },
-        scale: 0,
-      });
-      gsap.from("#CarelogiQ", {
-        ease: Power3.easeIn,
-        scrollTrigger: {
-          trigger: dividerRef.current,
-          start: "-=70",
-          end: "+=20",
-          scrub: 1,
-        },
-        scale: 0,
-      });
-    }, dividerRef);
+      );
+    }, containerRef);
     return () => ctx.revert();
   }, []);
 
@@ -95,36 +86,35 @@ const Experience: NextPage = (): JSX.Element => {
     name: string,
   ) => {
     return (
-      <div
-        id={name}
-        className="h-3/5 w-full rounded-2xl border-[1px] border-solid border-white border-opacity-10 bg-gradient-to-b from-black/40 to-black/20 py-4 text-center shadow-[0_0_20px_10px_rgba(0,0,0,0.75)] backdrop-blur-lg"
-      >
-        <div className="flex h-full flex-col items-center gap-6 px-3 md:w-full md:flex-row md:justify-center">
-          <img
-            src={imageUrl}
-            alt="!IMG"
-            className="mx-auto my-auto h-32 w-auto"
-          />
-          <div
-            className="flex h-3/5 w-full flex-col items-start gap-2"
-            key={index}
-          >
-            <p className="break-before-all text-left text-base">{header}</p>
-            <div className="flex h-full flex-col items-start gap-1">
-              <p className="text-base font-semibold">Key Responsibilities</p>
-              <ul className="list-outside list-disc">
-                {responsibilites.map((item: string) => (
-                  <li className="ml-4 list-item break-before-all text-start">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {footer && (
-              <p className="break-before-all text-left text-base">{footer}</p>
-            )}
+      <div className="flex h-full w-auto flex-col items-center gap-4 rounded-xl border border-[#52796f] p-4 hover:bg-zinc-800 hover:shadow-lg" key={index}>
+        <div className="flex w-auto flex-row justify-start gap-4">
+          <img src={imageUrl} alt="!IMG" className="my-auto h-32 w-32" />
+          <div className="flex h-full flex-col items-start gap-2">
+            <h2 className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+              {name}
+            </h2>
+            <p className="h-hull w-full break-before-all text-left text-base text-zinc-600 dark:text-zinc-400">
+              {header}
+            </p>
           </div>
         </div>
+        <div className="flex h-full flex-col items-start gap-1">
+          <h2 className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+            Key Responsibilities
+          </h2>
+          <ul className="ml-4 list-outside list-disc">
+            {responsibilites.map((item: string) => (
+              <li className="ml-4 list-item break-before-all text-start text-zinc-600 dark:text-zinc-400">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        {footer && (
+          <p className="h-hull w-full break-before-all text-left text-base text-zinc-600 dark:text-zinc-400">
+            {footer}
+          </p>
+        )}
       </div>
     );
   };
@@ -133,11 +123,11 @@ const Experience: NextPage = (): JSX.Element => {
 
   return (
     <div
-      className="flex h-full w-full flex-col items-center justify-center gap-8"
-      ref={(el) => (dividerRef.current = el)}
+      className="flex h-full w-full flex-col items-start justify-center gap-8"
+      ref={(el) => (containerRef.current = el)}
     >
-      <TextHeaders>Experiences</TextHeaders>
-      <div className="flex h-full flex-col items-center gap-8 px-4 pt-8">
+      <TextHeaders id="experienceHeader">Experiences</TextHeaders>
+      <div className="flex h-full flex-col items-start gap-8 p-4 md:w-full md:flex-row md:justify-start">
         {experiences.map((item: ExperienceDescriptionProps, index: number) => {
           return formatDescription(
             item.header,
@@ -149,6 +139,18 @@ const Experience: NextPage = (): JSX.Element => {
           );
         })}
       </div>
+      {/* <div className="flex h-full flex-col items-center gap-8 px-4 pt-8">
+        {experiences.map((item: ExperienceDescriptionProps, index: number) => {
+          return formatDescription(
+            item.header,
+            item.responsibilites,
+            item.footer,
+            index,
+            item.imageUrl,
+            item.name,
+          );
+        })}
+      </div> */}
     </div>
   );
 };

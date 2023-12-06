@@ -112,13 +112,16 @@ const Projects: NextPage = (): JSX.Element => {
 
   return (
     <div
-      className="flex h-full w-full flex-col items-center justify-center gap-28"
+      className="flex h-full w-full flex-col items-start justify-center gap-28"
       ref={(el) => {
         triggerContainerRef.current = el;
       }}
     >
       <TextHeaders>Projects</TextHeaders>
-      <div className="flex h-full flex-col items-center gap-24 md:w-full md:flex-row md:items-start md:justify-around md:gap-8">
+      {projectDetails.map((project:ProjectDetails ) => {
+        return <></>
+      })}
+      {/* <div className="flex h-full flex-col items-center gap-24 md:w-full md:flex-row md:items-start md:justify-around md:gap-8">
         {projectDetails.map((project: ProjectDetails, index: number) => (
           <div
             className="relative max-h-full w-4/5 flex-grow rounded"
@@ -165,7 +168,7 @@ const Projects: NextPage = (): JSX.Element => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
