@@ -1,16 +1,12 @@
-import gsap from "gsap";
-import { TextPlugin } from "gsap/TextPlugin";
 import React from "react";
 
 const TextHeader: React.ForwardRefRenderFunction<
   HTMLHeadingElement,
   React.HTMLAttributes<HTMLHeadingElement>
 > = ({ children, ...props }, ref): JSX.Element => {
-  gsap.registerPlugin(TextPlugin);
-
   return (
     <h1
-      className="break-after-all text-3xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl"
+      className="break-after-all text-3xl font-bold tracking-wider text-zinc-800 dark:text-zinc-100"
       {...props}
     >
       {children}

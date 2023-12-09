@@ -82,76 +82,7 @@ const Skills: NextPage = (): JSX.Element => {
     { name: "axios", imageUrl: Axios.src },
   ];
 
-  useEffect(() => {
-    if (cursorRef.current) {
-      initFireCursorTrail(cursorRef.current);
-    }
-    const tl = gsap.timeline();
-    const ctx = gsap.context(() => {
-      tl.fromTo(
-        "#skillHeader",
-        {
-          duration: 0.3,
-          opacity: 0,
-          text: "",
-        },
-        {
-          opacity: 1,
-          duration: 0.5,
-          text: "Skills",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top-=270",
-            end: "top-=200",
-            scrub: 1,
-            markers: true,
-          },
-        },
-      )
-        .to("#slogan", {
-          opacity: 0,
-        })
-        .to("#slogan", {
-          opacity: 1,
-          duration: 0.3,
-          ease: Power3.easeIn,
-          scrollTrigger: {
-            trigger: "#skillHeader",
-            start: "top-=210",
-            end: "top-=30",
-            scrub: 1,
-            markers: true,
-          },
-        })
-        .fromTo(
-          "#techcontainer",
-          {
-            scale: 0,
-            duration: 0.2,
-            scrollTrigger: {
-              trigger: "#slogan",
-              start: "top-=20",
-              end: "top+=30",
-              scrub: true,
-            },
-            ease: Power3.easeIn,
-          },
-          {
-            scale: 1,
-            duration: 0.1,
-            scrollTrigger: {
-              trigger: "#slogan",
-              start: "top-=20",
-              end: "top+=30",
-              scrub: true,
-            },
-            ease: Power3.easeIn,
-          },
-        );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div
@@ -160,11 +91,24 @@ const Skills: NextPage = (): JSX.Element => {
         containerRef.current = el;
       }}
     >
-      <TextHeader id="skillHeader">Skills</TextHeader>
+      <div className="flex h-full w-full flex-row items-center justify-start gap-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          xlinkActuate="http://www.w3.org/1999/xlink"
+          version="1.1"
+          id="Capa_1"
+          viewBox="0 0 290 290"
+          xmlSpace="preserve"
+          className="h-10 w-10 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300"
+        >
+          <path d="M285.857,52.128l-42.557,42.557c-3.887,3.887-10.184,3.887-14.072,0l-33.914-33.914c-3.887-3.887-3.887-10.186,0-14.071  l42.557-42.556c-26.965-9.211-58.012-3.066-79.518,18.441c-22.459,22.457-28.162,55.313-17.129,83.063l-45.361,45.359  c-25.279-9.078-54.639-3.505-74.889,16.747c-27.967,27.966-27.965,73.308,0,101.271c27.961,27.964,73.303,27.966,101.27,0  c20.252-20.253,25.826-49.614,16.748-74.893l45.359-45.359c27.75,11.032,60.607,5.33,83.065-17.127  C288.922,110.141,295.068,79.095,285.857,52.128z M99.793,246.573L61.291,256.89l-28.182-28.181l10.318-38.501l38.5-10.318  l28.184,28.182L99.793,246.573z" />
+        </svg>
+        <TextHeader id="skillHeader">Skills</TextHeader>
+      </div>
       <div className="max-w-full">
         <div className="mr-auto w-full md:w-4/5">
           <p
-            className="h-hull w-full break-before-all text-left text-base text-zinc-600 opacity-0 dark:text-zinc-400"
+            className="h-hull w-full break-before-all text-left text-base text-zinc-600 dark:text-zinc-400"
             id="slogan"
           >
             With these skill sets, I have been nailing down the creation of
@@ -175,16 +119,16 @@ const Skills: NextPage = (): JSX.Element => {
         </div>
       </div>
       <div
-        className="flex w-full scale-0 flex-row flex-wrap justify-start gap-4"
+        className="flex w-full flex-row flex-wrap justify-start gap-4"
         id="techcontainer"
       >
         <div
-          className="flex h-full w-auto flex-col items-start justify-start gap-4 p-4 hover:rounded-xl hover:bg-zinc-800"
+          className="flex h-full w-auto flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40"
           id="uitech"
         >
           <div className="max-w-full border-l-green-500">
             <div className="w-36">
-              <h2 className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+              <h2 className="text-base font-semibold tracking-wider text-zinc-800 dark:text-zinc-100">
                 UI Libraries
               </h2>
             </div>
@@ -202,12 +146,12 @@ const Skills: NextPage = (): JSX.Element => {
           </div>
         </div>
         <div
-          className="flex h-full w-auto flex-col items-start justify-start gap-4 p-4 hover:rounded-xl hover:bg-zinc-800"
+          className="flex h-full w-auto flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40"
           id="uicomptech"
         >
           <div className="max-w-full border-l-green-500">
             <div className="w-auto">
-              <h2 className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+              <h2 className="text-base font-semibold tracking-wider text-zinc-800 dark:text-zinc-100">
                 UI Component Libraries
               </h2>
             </div>
@@ -225,12 +169,12 @@ const Skills: NextPage = (): JSX.Element => {
           </div>
         </div>
         <div
-          className="flex h-full w-auto flex-col items-start justify-start gap-4 p-4 hover:rounded-xl hover:bg-zinc-800"
+          className="flex h-full w-auto flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40"
           id="datafetchtech"
         >
           <div className="max-w-full border-l-green-500">
             <div className="w-auto">
-              <h2 className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+              <h2 className="text-base font-semibold tracking-wider text-zinc-800 dark:text-zinc-100">
                 Data Fetch Libraries
               </h2>
             </div>
@@ -248,12 +192,12 @@ const Skills: NextPage = (): JSX.Element => {
           </div>
         </div>
         <div
-          className="flex h-full w-auto flex-col items-start justify-start gap-4 p-4 hover:rounded-xl hover:bg-zinc-800"
+          className="flex h-full w-auto flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40"
           id="backendtech"
         >
           <div className="max-w-full border-l-green-500">
             <div className="w-auto">
-              <h2 className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+              <h2 className="text-base font-semibold tracking-wider text-zinc-800 dark:text-zinc-100">
                 Backend Technologies
               </h2>
             </div>

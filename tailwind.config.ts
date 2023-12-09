@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        sans: ["var(--font-inter)", ...fontFamily.sans],
       },
       textShadow: {
         sm: "0 1px 2px var(--tw-shadow-color)",

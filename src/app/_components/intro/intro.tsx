@@ -1,276 +1,89 @@
 "use client";
-import gsap, { Power3 } from "gsap";
-import { TextPlugin } from "gsap/TextPlugin";
 import { NextPage } from "next";
-import { useEffect, useRef } from "react";
-import SplitType from "split-type";
+import { useEffect } from "react";
 import MayurLogo from "../../../assets/images/mayurLogo.jpg";
-import { Linkedin, Github, StickyNote } from "lucide-react";
-// import SplitText from "gsap/src/SplitText";
 
 const Introduction: NextPage = (): JSX.Element => {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const imageRef = useRef<HTMLImageElement | null>(null);
-  const textOneRef = useRef<HTMLParagraphElement | null>(null);
-  gsap.registerPlugin(TextPlugin);
-  const textTl = gsap.timeline({ repeat: -1 });
-  textTl.timeScale(2);
-
-  const randomNumber = (min: number, max: number) => {
-    return Math.floor(Math.random() * (1 + max - min) + min);
-  };
-
-  const rangeToPercent = (number: number, min: number, max: number) => {
-    return (number - min) / (max - min);
-  };
-
-  useEffect(() => {
-    const tl = gsap.timeline();
-    let desctl: gsap.core.Timeline | null = null;
-    const ele = textOneRef.current;
-    if (ele) {
-      const splitTxt = new SplitType(ele, { types: "words" });
-      desctl = gsap.timeline();
-      if (splitTxt.words) {
-        try {
-          const numWords = splitTxt.words.length;
-          if (ele) {
-            gsap.set(ele, {
-              transformPerspective: 600,
-              perspective: 300,
-              transformStyle: "preserve-3d",
-              autoAlpha: 1,
-            });
-          }
-
-          if (numWords > 0) {
-            for (let i = 0; i < numWords; i++) {
-              /* eslint-disable */
-              desctl.from(
-                splitTxt.words[i] as any,
-                {
-                  z: randomNumber(-500, 300),
-                  opacity: 0,
-                  rotationY: randomNumber(-40, 40),
-                  duration: 1.5,
-                },
-                Math.random() * 1.5,
-              );
-              /* eslint-disable */
-            }
-          }
-          desctl.from(
-            ele,
-            {
-              rotationY: 180,
-              transformOrigin: "50% 75% 200",
-              ease: Power2.easeOut,
-              duration: desctl.duration(),
-            },
-            0,
-          );
-          /* eslint-disable */
-          for (let i = 0; i < numWords; i++) {
-            var z = randomNumber(-50, 50);
-            desctl.to(
-              splitTxt.words[i] as any,
-              { z: z, opacity: rangeToPercent(z, -50, 50), duration: 0.5 },
-              "pulse",
-            );
-            /* eslint-disable */
-          }
-
-          desctl.to(
-            ele,
-            { rotationX: -35, rotationY: 0, duration: 0.5 },
-            "pulse2",
-          );
-
-          desctl.to(
-            splitTxt.words,
-            { z: 0, opacity: 1, duration: 0.5 },
-            "reset",
-          );
-          desctl.to(
-            ele,
-            { rotationY: 0, rotationX: 0, duration: 0.5 },
-            "reset",
-          );
-
-          desctl.add("explode", "+=90");
-          /* eslint-disable */
-          for (let i = 0; i < numWords; i++) {
-            desctl.to(
-              splitTxt.words[i] as any,
-              {
-                z: randomNumber(100, 500),
-                duration: 0.6,
-                opacity: 0,
-                rotation: randomNumber(360, 720),
-                rotationX: randomNumber(-360, 360),
-                rotationY: randomNumber(-360, 360),
-              },
-              "explode+=" + Math.random() * 0.2,
-            );
-          }
-          /* eslint-disable */
-        } catch (err) {
-          console.log("err gsap", err);
-        }
-      }
-    }
-    const ctx = gsap.context(() => {
-      tl.to(imageRef.current, {
-        scale: 0,
-        opacity: 0,
-        duration: 0.3,
-      })
-        .to(imageRef.current, {
-          scale: 1,
-          duration: 0.5,
-          opacity: 1.5,
-        })
-        .to(imageRef.current, {
-          marginRight: "auto",
-          duration: 0.6,
-          height: 95,
-          width: 95,
-        })
-        .to("#tagline", {
-          opacity: 0,
-        })
-        .to("#tagline", {
-          opacity: 1,
-          duration: 0.4,
-          ease: Power3.easeIn,
-        });
-      if (desctl) {
-        tl.add(desctl);
-      }
-      tl.fromTo(
-        "#linkedin",
-        {
-          scale: 0,
-          y: -100,
-          duration: 0.3,
-        },
-        {
-          scale: 1,
-          y: 0,
-          duration: 0.3,
-        },
-      );
-      tl.fromTo(
-        "#github",
-        {
-          scale: 0,
-          y: -100,
-          duration: 0.3,
-        },
-        {
-          scale: 1,
-          y: 0,
-          duration: 0.3,
-        },
-      );
-      tl.fromTo(
-        "#resume",
-        {
-          scale: 0,
-          y: -100,
-          duration: 0.3,
-        },
-        {
-          scale: 1,
-          y: 0,
-          duration: 0.3,
-        },
-      );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+  useEffect(() => {}, []);
   return (
-    <div className="m-auto mt-16 flex h-full w-full overflow-hidden">
+    <div className="m-auto flex h-full w-full flex-col items-start overflow-hidden">
       <div
-        className="flex h-full w-full flex-col items-center gap-8 md:flex-row md:justify-around"
-        ref={(el) => {
-          containerRef.current = el;
-        }}
+        className="flex h-full w-full flex-col items-start justify-start"
+        id="introContainer"
       >
-        <div className="flex h-full w-full flex-col items-center justify-center gap-5">
-          <img
-            src={MayurLogo.src}
-            ref={(el) => {
-              imageRef.current = el;
-            }}
-            alt="..."
-            className={`h-44 w-44 place-items-center rounded-full border-none object-cover align-middle opacity-0 shadow-lg`}
-          />
-          <div className="max-w-full">
-            <div className="mr-auto w-full md:w-4/5">
-              <h1
-                className="break-after-all text-3xl font-bold tracking-tight text-zinc-800 opacity-0 dark:text-zinc-100 sm:text-5xl"
-                id="tagline"
-              >
-                ReactJS Developer, Senior Front-end Engineer, Web Development
-                Enthusiast
-              </h1>
-            </div>
+        <img
+          src={MayurLogo.src}
+          alt="..."
+          className={`h-16 w-16 place-items-center rounded-full border-none object-cover align-middle shadow-lg`}
+        />
+        <div className="mt-9 flex h-full max-w-full flex-col items-center gap-6">
+          <div className="mr-auto w-full lg:w-4/5">
+            <h1
+              className="break-after-all text-3xl font-bold text-zinc-800 dark:text-zinc-100 sm:text-5xl"
+              id="tagline"
+              style={{
+                lineHeight: "4rem",
+              }}
+            >
+              ReactJS Developer, Senior Front-end Engineer, and Web Development
+              Enthusiast
+            </h1>
           </div>
           <div className="max-w-full">
             <div className="mr-auto w-full md:w-4/5">
               <p
-                className="h-hull w-full break-before-all text-left text-base text-zinc-600 opacity-0 dark:text-zinc-400"
-                style={{
-                  WebkitTransform: "translate3d(0, 0, 0)",
-                  // lineHeight: 36,
-                  margin: "50px auto",
-                }}
+                className="h-hull w-full break-before-all text-left text-base text-zinc-600 dark:text-zinc-400"
                 id="text"
-                ref={(el) => {
-                  textOneRef.current = el;
+                style={{
+                  lineHeight: "2rem",
                 }}
               >
-                I am Mayur Karmakar, a Senior Frontend Developer at Beyond Exam,
-                an Edtech SAAS company that focuses on equitable learning. I
-                have two years of hands-on experience working with a versatile
+                I am Mayur Karmakar, a Senior Frontend Developer at Beyond Exam.
+                I have two years of hands-on experience working with a versatile
                 toolset, including ReactJS, NextJS, Redux, Zustand, Typescript,
                 WebRTC Apis, TRPC and UI frameworks such as Ant Design,
-                Material-UI, and Mantine.In this role, I have leveraged my
-                knowledge and skills towards contributing to the development and
-                improvement of the web application that enables educators and
-                learners to provide and ensure effective e-learning help and
-                meet their requirements.
-                <br />
-                <br />I have collaborated with a talented and diverse team of
-                developers, designers, and educators, and I always strive to
-                deliver solutions that not only meet but exceed client
-                expectations.
+                Material-UI, and Mantine. I have collaborated with a talented
+                and diverse team of developers, designers, and educators, and I
+                always strive to deliver solutions that not only meet but exceed
+                client expectations.
               </p>
             </div>
           </div>
         </div>
-        <div className="my-auto flex h-full flex-row justify-center gap-12 md:flex-col md:items-center">
-          <div
-            className="flex h-10 w-10 scale-0 cursor-pointer rounded-full border border-zinc-600 p-2 hover:border-white"
-            id="linkedin"
+      </div>
+      <div className="my-auto mt-6 flex h-full flex-row justify-center gap-6 md:items-center">
+        <a
+          className="group -m-1 p-1"
+          aria-label="Follow on LinkedIn"
+          href="https://linkedin.com"
+          id="linkedIn"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300"
           >
-            <Linkedin className="text-zinc-600 hover:text-white" />
-          </div>
-          <div
-            className="flex h-10 w-10 scale-0 cursor-pointer rounded-full border border-zinc-600 p-2 hover:border-white"
-            id="github"
+            <path d="M18.335 18.339H15.67v-4.177c0-.996-.02-2.278-1.39-2.278-1.389 0-1.601 1.084-1.601 2.205v4.25h-2.666V9.75h2.56v1.17h.035c.358-.674 1.228-1.387 2.528-1.387 2.7 0 3.2 1.778 3.2 4.091v4.715zM7.003 8.575a1.546 1.546 0 01-1.548-1.549 1.548 1.548 0 111.547 1.549zm1.336 9.764H5.666V9.75H8.34v8.589zM19.67 3H4.329C3.593 3 3 3.58 3 4.297v15.406C3 20.42 3.594 21 4.328 21h15.338C20.4 21 21 20.42 21 19.703V4.297C21 3.58 20.4 3 19.666 3h.003z"></path>
+          </svg>
+        </a>
+        <a
+          className="group -m-1 p-1"
+          aria-label="Follow on GitHub"
+          href="https://github.com"
+          id="github"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300"
           >
-            <Github className="text-zinc-600 hover:text-white" />
-          </div>
-          <div
-            className="flex h-10 w-10 scale-0 cursor-pointer rounded-full border border-zinc-600 p-2 hover:border-white"
-            id="resume"
-          >
-            <StickyNote className="text-zinc-600 hover:text-white" />
-          </div>
-        </div>
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M12 2C6.475 2 2 6.588 2 12.253c0 4.537 2.862 8.369 6.838 9.727.5.09.687-.218.687-.487 0-.243-.013-1.05-.013-1.91C7 20.059 6.35 18.957 6.15 18.38c-.113-.295-.6-1.205-1.025-1.448-.35-.192-.85-.667-.013-.68.788-.012 1.35.744 1.538 1.051.9 1.551 2.338 1.116 2.912.846.088-.666.35-1.115.638-1.371-2.225-.256-4.55-1.14-4.55-5.062 0-1.115.387-2.038 1.025-2.756-.1-.256-.45-1.307.1-2.717 0 0 .837-.269 2.75 1.051.8-.23 1.65-.346 2.5-.346.85 0 1.7.115 2.5.346 1.912-1.333 2.75-1.05 2.75-1.05.55 1.409.2 2.46.1 2.716.637.718 1.025 1.628 1.025 2.756 0 3.934-2.337 4.806-4.562 5.062.362.32.675.936.675 1.897 0 1.371-.013 2.473-.013 2.82 0 .268.188.589.688.486a10.039 10.039 0 0 0 4.932-3.74A10.447 10.447 0 0 0 22 12.253C22 6.588 17.525 2 12 2Z"
+            ></path>
+          </svg>
+        </a>
       </div>
     </div>
   );

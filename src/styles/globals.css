@@ -3,5 +3,8 @@
 @tailwind utilities;
 
 body {
-    overflow-x: hidden;
+  overflow-x: hidden;
+  /* font-family: "Lato", sans-serif; */
+  font-family: "Roboto", sans-serif;
+  /* font-family: "Roboto", sans-serif; */
 }

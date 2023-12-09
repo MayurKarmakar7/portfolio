@@ -8,20 +8,26 @@ import Experience from "../_components/Experience/Experience";
 import Projects from "../_components/Projects/Projects";
 import Skills from "../_components/Skills/Skills";
 import Introduction from "../_components/intro/intro";
+import Header from "../_components/Header/Header";
+import Footer from "../_components/Footer/Footer";
 
 const Portfolio: NextPage = (): JSX.Element => {
   return (
-    <div
-      className="flex h-full w-full flex-col items-center justify-center gap-16 overflow-x-hidden"
-      id="about"
-    >
-      <Introduction />
-      <Skills />
-      <Experience />
-      <Projects />
-      <Education />
-      <Certifications />
-      <ContactMe />
+    <div className="flex h-full flex-col gap-16 md:gap-24">
+      <Header />
+      <div
+        className="flex h-full w-full flex-col items-center justify-center gap-32 overflow-x-hidden"
+        id="about"
+      >
+        <Introduction />
+        <Skills />
+        <Experience />
+        <Projects />
+        <Education />
+        <Certifications />
+        <ContactMe />
+      </div>
+      <Footer />
     </div>
   );
 };

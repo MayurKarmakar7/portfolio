@@ -7,8 +7,8 @@ export default {
   out: "./drizzle",
   dbCredentials: {
     host: "aws.connect.psdb.cloud",
-    user: "hs1cjp7z7gu4u2t007du",
-    password: "pscale_pw_SzJxA5N5iD8Ml0UnIfLFPApoiE9jhIJD1KSWG1C7FIA",
+    user: "e8s79le3fsdzaqtxj85y",
+    password: "pscale_pw_2avdpEy5kcCV6Bm9ImKZblpwKg7GlPS0kPRsFM0yVOw",
     database: "portfolio",
   },
   tablesFilter: ["mayur_portfolio_*"],

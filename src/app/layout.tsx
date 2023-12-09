@@ -9,7 +9,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-roboto",
 });
 
 export const metadata = {
@@ -28,12 +28,18 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Lato:ital@0;1&family=Roboto:wght@300&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className={`font-sans ${inter.variable}`}>
+      <body>
         <TRPCReactProvider cookies={cookies().toString()}>
           <MantineProvider
             theme={{
