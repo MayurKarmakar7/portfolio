@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import MayurLogo from "../../../assets/images/mayurLogo.jpg";
 
 const Introduction: NextPage = (): JSX.Element => {
-  useEffect(() => {}, []);
+
   return (
     <div className="m-auto flex h-full w-full flex-col items-start overflow-hidden">
       <div

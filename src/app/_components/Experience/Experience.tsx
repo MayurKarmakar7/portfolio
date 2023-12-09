@@ -1,7 +1,6 @@
 "use client";
-import gsap, { Power3 } from "gsap";
 import { NextPage } from "next";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import BesecureLogo from "../../../assets/images/bsecurelogo.png";
 import Carelogiq from "../../../assets/images/carelogiq.png";
 import TextHeaders from "../textHeaders/textHeaders";
@@ -49,8 +48,6 @@ const Experience: NextPage = (): JSX.Element => {
       footer: "",
     },
   ];
-
-  useEffect(() => {}, []);
 
   const formatDescription = (
     header: string,

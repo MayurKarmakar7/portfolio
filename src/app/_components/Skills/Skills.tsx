@@ -1,11 +1,13 @@
 "use client";
 
-import gsap, { Power3 } from "gsap";
+import { Tooltip } from "@mantine/core";
+import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { TextPlugin } from "gsap/TextPlugin";
 import { NextPage } from "next";
-import { ForwardedRef, forwardRef, useEffect, useRef } from "react";
-import { initFireCursorTrail } from "~/app/_utility/functions";
+import { ForwardedRef, forwardRef, useRef } from "react";
 import Antd from "../../../assets/logos/antd.png";
+import Axios from "../../../assets/logos/axios.png";
 import FramerMotion from "../../../assets/logos/framerMotion.png";
 import Mantine from "../../../assets/logos/mantine.png";
 import MaterialUI from "../../../assets/logos/materialui.png";
@@ -21,11 +23,7 @@ import Tailwind from "../../../assets/logos/tailwind.webp";
 import Trpc from "../../../assets/logos/trpc.png";
 import Webrtc from "../../../assets/logos/webrtc.png";
 import Zustand from "../../../assets/logos/zustand.png";
-import Axios from "../../../assets/logos/axios.png";
 import TextHeader from "../textHeaders/textHeaders";
-import classes from "./skills.module.css";
-import { TextPlugin } from "gsap/TextPlugin";
-import { Tooltip } from "@mantine/core";
 
 type ImageContainersProps = {
   imageUrl: string;
@@ -81,8 +79,6 @@ const Skills: NextPage = (): JSX.Element => {
     { name: "reactquery", imageUrl: ReactQuery.src },
     { name: "axios", imageUrl: Axios.src },
   ];
-
-  useEffect(() => {}, []);
 
   return (
     <div
