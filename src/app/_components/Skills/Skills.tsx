@@ -1,16 +1,13 @@
 "use client";
 
 import { Tooltip } from "@mantine/core";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { TextPlugin } from "gsap/TextPlugin";
 import { NextPage } from "next";
 import { ForwardedRef, forwardRef, useRef } from "react";
 import Antd from "../../../assets/logos/antd.png";
 import Axios from "../../../assets/logos/axios.png";
+import Drizzle from "../../../assets/logos/drizzle.jpg";
 import FramerMotion from "../../../assets/logos/framerMotion.png";
 import Mantine from "../../../assets/logos/mantine.png";
-import MaterialUI from "../../../assets/logos/materialui.png";
 import NextJS from "../../../assets/logos/nextjs.webp";
 import NodeJs from "../../../assets/logos/nodejs.png";
 import Prisma from "../../../assets/logos/prisma.png";
@@ -40,26 +37,12 @@ type ImageContainersCombinedProps = ImageContainersProps &
 
 const Skills: NextPage = (): JSX.Element => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const cursorRef = useRef<HTMLDivElement | null>(null);
-  gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
-  const skillsDetail: SkillSet[] = [
-    { name: "react", imageUrl: ReactJS.src },
-    { name: "next", imageUrl: NextJS.src },
-    { name: "mantine", imageUrl: Mantine.src },
+  const others: SkillSet[] = [
     { name: "framemotion", imageUrl: FramerMotion.src },
-    { name: "antd", imageUrl: Antd.src },
-    { name: "materialui", imageUrl: MaterialUI.src },
-    { name: "node", imageUrl: NodeJs.src },
-    { name: "prisma", imageUrl: Prisma.src },
-    { name: "reactquery", imageUrl: ReactQuery.src },
-    { name: "redux", imageUrl: Redux.src },
-    { name: "shadcn", imageUrl: Shadcn.src },
     { name: "socketio", imageUrl: SocketIo.src },
-    { name: "tailwind", imageUrl: Tailwind.src },
     { name: "trpc", imageUrl: Trpc.src },
     { name: "webrtc", imageUrl: Webrtc.src },
-    { name: "zustand", imageUrl: Zustand.src },
   ];
 
   const frontEndTechs: SkillSet[] = [{ name: "react", imageUrl: ReactJS.src }];
@@ -80,12 +63,27 @@ const Skills: NextPage = (): JSX.Element => {
     { name: "axios", imageUrl: Axios.src },
   ];
 
+  const ormLibraries: SkillSet[] = [
+    { name: "prisma", imageUrl: Prisma.src },
+    { name: "Drizzle", imageUrl: Drizzle.src },
+  ];
+
+  const stateManagement: SkillSet[] = [
+    { name: "zustand", imageUrl: Zustand.src },
+    { name: "redux", imageUrl: Redux.src },
+  ];
+
+  const cssFramwork: SkillSet[] = [
+    { name: "tailwind", imageUrl: Tailwind.src },
+  ];
+
   return (
     <div
       className="flex h-full w-full flex-col items-start justify-center gap-8 pt-8"
       ref={(el) => {
         containerRef.current = el;
       }}
+      id="skills"
     >
       <div className="flex h-full w-full flex-row items-center justify-start gap-4">
         <svg
@@ -115,11 +113,11 @@ const Skills: NextPage = (): JSX.Element => {
         </div>
       </div>
       <div
-        className="flex w-full flex-row flex-wrap justify-start gap-4"
+        className="grid h-auto w-full grid-flow-row grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"
         id="techcontainer"
       >
         <div
-          className="flex h-full w-auto flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40"
+          className="flex h-full w-full flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40 md:w-auto"
           id="uitech"
         >
           <div className="max-w-full border-l-green-500">
@@ -129,7 +127,7 @@ const Skills: NextPage = (): JSX.Element => {
               </h2>
             </div>
           </div>
-          <div className="flex w-full flex-row flex-wrap justify-start gap-4">
+          <div className="flex w-full max-w-full flex-row flex-wrap gap-4">
             {frontEndTechs.map((tech: SkillSet, index: number) => {
               return (
                 <ImageContainers
@@ -142,7 +140,7 @@ const Skills: NextPage = (): JSX.Element => {
           </div>
         </div>
         <div
-          className="flex h-full w-auto flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40"
+          className="flex h-full w-full flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40 md:w-auto"
           id="uicomptech"
         >
           <div className="max-w-full border-l-green-500">
@@ -165,7 +163,7 @@ const Skills: NextPage = (): JSX.Element => {
           </div>
         </div>
         <div
-          className="flex h-full w-auto flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40"
+          className="flex h-full w-full flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40 md:w-auto"
           id="datafetchtech"
         >
           <div className="max-w-full border-l-green-500">
@@ -175,7 +173,7 @@ const Skills: NextPage = (): JSX.Element => {
               </h2>
             </div>
           </div>
-          <div className="flex w-full flex-row flex-wrap justify-start gap-4">
+          <div className="flex w-full flex-row flex-wrap justify-start gap-4 md:w-auto">
             {dataFetchLibrary.map((tech: SkillSet, index: number) => {
               return (
                 <ImageContainers
@@ -188,7 +186,7 @@ const Skills: NextPage = (): JSX.Element => {
           </div>
         </div>
         <div
-          className="flex h-full w-auto flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40"
+          className="flex h-full w-full flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40 md:w-auto"
           id="backendtech"
         >
           <div className="max-w-full border-l-green-500">
@@ -200,6 +198,98 @@ const Skills: NextPage = (): JSX.Element => {
           </div>
           <div className="flex w-full flex-row flex-wrap justify-start gap-4">
             {backEndTechs.map((tech: SkillSet, index: number) => {
+              return (
+                <ImageContainers
+                  imageUrl={tech.imageUrl}
+                  id={tech.name}
+                  key={index}
+                />
+              );
+            })}
+          </div>
+        </div>
+        <div
+          className="flex h-full w-full flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40 md:w-auto"
+          id="backendtech"
+        >
+          <div className="max-w-full border-l-green-500">
+            <div className="w-auto">
+              <h2 className="text-base font-semibold tracking-wider text-zinc-800 dark:text-zinc-100">
+                ORM Libraries
+              </h2>
+            </div>
+          </div>
+          <div className="flex w-full flex-row flex-wrap justify-start gap-4">
+            {ormLibraries.map((tech: SkillSet, index: number) => {
+              return (
+                <ImageContainers
+                  imageUrl={tech.imageUrl}
+                  id={tech.name}
+                  key={index}
+                />
+              );
+            })}
+          </div>
+        </div>
+        <div
+          className="flex h-full w-full flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40 md:w-auto"
+          id="backendtech"
+        >
+          <div className="max-w-full border-l-green-500">
+            <div className="w-auto">
+              <h2 className="text-base font-semibold tracking-wider text-zinc-800 dark:text-zinc-100">
+                State Management Libraries
+              </h2>
+            </div>
+          </div>
+          <div className="flex w-full flex-row flex-wrap justify-start gap-4">
+            {stateManagement.map((tech: SkillSet, index: number) => {
+              return (
+                <ImageContainers
+                  imageUrl={tech.imageUrl}
+                  id={tech.name}
+                  key={index}
+                />
+              );
+            })}
+          </div>
+        </div>
+        <div
+          className="flex h-full w-full flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40 md:w-auto"
+          id="backendtech"
+        >
+          <div className="max-w-full border-l-green-500">
+            <div className="w-auto">
+              <h2 className="text-base font-semibold tracking-wider text-zinc-800 dark:text-zinc-100">
+                CSS Frameworks
+              </h2>
+            </div>
+          </div>
+          <div className="flex w-full flex-row flex-wrap justify-start gap-4">
+            {cssFramwork.map((tech: SkillSet, index: number) => {
+              return (
+                <ImageContainers
+                  imageUrl={tech.imageUrl}
+                  id={tech.name}
+                  key={index}
+                />
+              );
+            })}
+          </div>
+        </div>
+        <div
+          className="flex h-full w-full flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40 md:w-auto"
+          id="backendtech"
+        >
+          <div className="max-w-full border-l-green-500">
+            <div className="w-auto">
+              <h2 className="text-base font-semibold tracking-wider text-zinc-800 dark:text-zinc-100">
+                Others
+              </h2>
+            </div>
+          </div>
+          <div className="flex w-full flex-row flex-wrap justify-start gap-4">
+            {others.map((tech: SkillSet, index: number) => {
               return (
                 <ImageContainers
                   imageUrl={tech.imageUrl}
@@ -228,7 +318,7 @@ const ImageContainers = forwardRef(
       >
         <Tooltip label={id}>
           <img
-            className="h-full w-full object-fill"
+            className="h-full w-full object-cover"
             src={imageUrl}
             alt="!IMG"
           />

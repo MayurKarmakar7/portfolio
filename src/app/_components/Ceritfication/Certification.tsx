@@ -1,7 +1,6 @@
-import gsap from "gsap";
 import { type NextPage } from "next";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import TextHeaders from "../textHeaders/textHeaders";
 
 type Certifications = {
@@ -28,39 +27,13 @@ const Certifications: NextPage = (): JSX.Element => {
     },
   ];
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from("#header", {
-        duration: 0.3,
-        text: "",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "-=70",
-          end: "+=20",
-          scrub: 1,
-        },
-      });
-      gsap.from("#box", {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "top center",
-          scrub: 1,
-        },
-        stagger: { amount: 0.3 },
-        opacity: 0,
-        duration: 0.1,
-      });
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
-
   return (
     <div
       className="flex h-full w-full flex-col items-start justify-center gap-8"
       ref={(el) => {
         containerRef.current = el;
       }}
+      id="certification"
     >
       <div className="flex h-full flex-row items-center justify-start gap-4">
         <svg

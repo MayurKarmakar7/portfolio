@@ -10,32 +10,32 @@ const Footer: NextPage = (): JSX.Element => {
               <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
                 <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200">
                   <a
-                    className="transition hover:text-teal-500 dark:hover:text-teal-400 tracking-wide"
-                    href="/about"
+                    className="tracking-wide transition hover:text-teal-500 dark:hover:text-teal-400"
+                    href="#about"
                   >
                     About
                   </a>
                   <a
-                    className="transition hover:text-teal-500 dark:hover:text-teal-400 tracking-wide"
-                    href="/about"
+                    className="tracking-wide transition hover:text-teal-500 dark:hover:text-teal-400"
+                    href="#about"
                   >
                     Skills
                   </a>
                   <a
-                    className="transition hover:text-teal-500 dark:hover:text-teal-400 tracking-wide"
-                    href="/projects"
+                    className="tracking-wide transition hover:text-teal-500 dark:hover:text-teal-400"
+                    href="#experience"
                   >
                     Experience
                   </a>
                   <a
-                    className="transition hover:text-teal-500 dark:hover:text-teal-400 tracking-wide"
-                    href="/speaking"
+                    className="tracking-wide transition hover:text-teal-500 dark:hover:text-teal-400"
+                    href="#projects"
                   >
                     Projects
                   </a>
                   <a
-                    className="transition hover:text-teal-500 dark:hover:text-teal-400 tracking-wide"
-                    href="/uses"
+                    className="tracking-wide transition hover:text-teal-500 dark:hover:text-teal-400"
+                    href="#certification"
                   >
                     Certifications
                   </a>

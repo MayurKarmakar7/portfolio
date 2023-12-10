@@ -1,39 +1,9 @@
-import gsap from "gsap";
 import { NextPage } from "next";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import TextHeaders from "../textHeaders/textHeaders";
 
 const Education: NextPage = (): JSX.Element => {
   const parentDivRef = useRef<HTMLDivElement | null>(null);
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from("#header", {
-        duration: 0.3,
-        text: "",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "-=70",
-          end: "+=20",
-          scrub: 1,
-        },
-      });
-      gsap.from("#box", {
-        scrollTrigger: {
-          trigger: parentDivRef.current,
-          start: "top top",
-          end: "top center",
-          scrub: 1,
-        },
-        stagger: { amount: 0.3 },
-        opacity: 0,
-        duration: 1,
-      });
-    }, parentDivRef);
-
-    return () => ctx.revert();
-  }, []);
 
   return (
     <div
@@ -41,6 +11,7 @@ const Education: NextPage = (): JSX.Element => {
       ref={(el) => {
         parentDivRef.current = el;
       }}
+      id="education"
     >
       <div className="flex h-full w-full flex-row items-center justify-start gap-4">
         <svg
@@ -67,10 +38,7 @@ const Education: NextPage = (): JSX.Element => {
         className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40"
       >
         <div className="grid max-w-3xl grid-cols-1 items-baseline gap-y-8 md:grid-cols-4">
-          <h2
-            id=":S1:"
-            className="text-sm font-semibold tracking-wider text-zinc-800 dark:text-zinc-100"
-          >
+          <h2 className="text-sm font-semibold tracking-wider text-zinc-800 dark:text-zinc-100">
             Bachelor Of Computer Applications
           </h2>
           <div className="md:col-span-3">

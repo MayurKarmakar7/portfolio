@@ -1,7 +1,5 @@
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { NextPage } from "next";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import CP from "../../../assets/logos/collegePapers.png";
 import CowinHistory from "../../../assets/logos/cowinHistory.jpg";
 import DjangoRF from "../../../assets/logos/djangoRF.png";
@@ -17,7 +15,6 @@ import Redux from "../../../assets/logos/redux.png";
 import SciKit from "../../../assets/logos/scikit.png";
 import TensorFL from "../../../assets/logos/tensorFlow.png";
 import TextHeaders from "../textHeaders/textHeaders";
-import selector from "./Projects.module.css";
 
 type ProjectDetails = {
   header: string;
@@ -37,10 +34,6 @@ type ProjectContainerProps = {
 
 const Projects: NextPage = (): JSX.Element => {
   const triggerContainerRef = useRef<HTMLDivElement | null>(null);
-  const experienceItemRefs = Array.from({ length: 2 }, () =>
-    useRef<HTMLDivElement | null>(null),
-  );
-  gsap.registerPlugin(ScrollTrigger);
   const projectDetails: ProjectDetails[] = [
     {
       name: "CowinHistory",
@@ -90,50 +83,23 @@ const Projects: NextPage = (): JSX.Element => {
     },
   ];
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from("#header", {
-        duration: 0.3,
-        text: "",
-        scrollTrigger: {
-          trigger: triggerContainerRef.current,
-          start: "-=70",
-          end: "+=20",
-          scrub: 1,
-        },
-      });
-      gsap.from("#expDetail", {
-        scrollTrigger: {
-          trigger: triggerContainerRef.current,
-          start: "top top",
-          end: "top center",
-          scrub: 1,
-        },
-        stagger: { amount: 0.3 },
-        scale: 0,
-        duration: 0.2,
-        delay: 0.1,
-      });
-    }, triggerContainerRef);
-    return () => ctx.revert();
-  }, []);
-
   return (
     <div
       className="flex h-full w-full flex-col items-start justify-center gap-8"
       ref={(el) => {
         triggerContainerRef.current = el;
       }}
+      id="projects"
     >
       <div className="flex h-full w-full flex-row items-center justify-start gap-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          shape-rendering="geometricPrecision"
-          text-rendering="geometricPrecision"
-          image-rendering="optimizeQuality"
+          shapeRendering="geometricPrecision"
+          textRendering="geometricPrecision"
+          imageRendering="optimizeQuality"
           viewBox="0 0 122.88 100.53"
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           className="h-10 w-10 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300"
         >
           <g>
@@ -143,7 +109,7 @@ const Projects: NextPage = (): JSX.Element => {
         <TextHeaders>Projects</TextHeaders>
       </div>
       <div className="flex h-full flex-col items-start gap-4 md:w-full md:flex-row md:justify-start">
-        {projectDetails.map((project: ProjectDetails) => {
+        {projectDetails.map((project: ProjectDetails, index: number) => {
           return (
             <ProjectContainer
               description={project.header}
@@ -151,6 +117,7 @@ const Projects: NextPage = (): JSX.Element => {
               repoLink={""}
               name={project.name}
               techImageUrls={project.techImages}
+              key={index}
             />
           );
         })}
@@ -183,17 +150,17 @@ const ProjectContainer: NextPage<ProjectContainerProps> = ({
       <h2 className="mt-6 text-base font-semibold tracking-wider text-zinc-800 dark:text-zinc-100">
         {name}
       </h2>
-      <p className="relative z-10 mt-2 text-sm tracking-wider text-zinc-600 dark:text-zinc-400 leading-6">
+      <p className="relative z-10 mt-2 text-sm leading-6 tracking-wider text-zinc-600 dark:text-zinc-400">
         {description}
       </p>
       <svg
         viewBox="0 0 24 24"
         aria-hidden="true"
-        className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300 mt-6 cursor-pointer"
+        className="mt-6 h-6 w-6 cursor-pointer fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300"
       >
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M12 2C6.475 2 2 6.588 2 12.253c0 4.537 2.862 8.369 6.838 9.727.5.09.687-.218.687-.487 0-.243-.013-1.05-.013-1.91C7 20.059 6.35 18.957 6.15 18.38c-.113-.295-.6-1.205-1.025-1.448-.35-.192-.85-.667-.013-.68.788-.012 1.35.744 1.538 1.051.9 1.551 2.338 1.116 2.912.846.088-.666.35-1.115.638-1.371-2.225-.256-4.55-1.14-4.55-5.062 0-1.115.387-2.038 1.025-2.756-.1-.256-.45-1.307.1-2.717 0 0 .837-.269 2.75 1.051.8-.23 1.65-.346 2.5-.346.85 0 1.7.115 2.5.346 1.912-1.333 2.75-1.05 2.75-1.05.55 1.409.2 2.46.1 2.716.637.718 1.025 1.628 1.025 2.756 0 3.934-2.337 4.806-4.562 5.062.362.32.675.936.675 1.897 0 1.371-.013 2.473-.013 2.82 0 .268.188.589.688.486a10.039 10.039 0 0 0 4.932-3.74A10.447 10.447 0 0 0 22 12.253C22 6.588 17.525 2 12 2Z"
         ></path>
       </svg>

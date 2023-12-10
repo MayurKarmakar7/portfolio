@@ -2,7 +2,7 @@
 
 import { MailIcon } from "lucide-react";
 import { NextPage } from "next";
-import { ChangeEvent, MouseEventHandler, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { api } from "~/trpc/react";
 import TextHeaders from "../textHeaders/textHeaders";
 
@@ -38,7 +38,10 @@ const ContactMe: NextPage = (): JSX.Element => {
   };
 
   return (
-    <div className="mx-auto w-full max-w-full rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40 md:w-3/5">
+    <div
+      className="mx-auto w-full max-w-full rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40 md:w-3/5"
+      id="contactme"
+    >
       <div className="flex h-full w-full flex-col items-start justify-center gap-8">
         <div className="flex w-full flex-row justify-start gap-4">
           {/* <svg
@@ -54,7 +57,7 @@ const ContactMe: NextPage = (): JSX.Element => {
             fill="#000000"
           />
         </svg> */}
-          <MailIcon className="h-10 w-10 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+          <MailIcon className="h-10 w-10 transition" />
           <TextHeaders>Contact Me</TextHeaders>
         </div>
         <form className="w-full">
@@ -89,7 +92,7 @@ const ContactMe: NextPage = (): JSX.Element => {
                 handleInput("email", e.target.value)
               }
               className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-              placeholder="name@flowbite.com"
+              placeholder="your@email.com"
               required
             />
           </div>
