@@ -1,8 +1,7 @@
 "use client";
 
 import { MailIcon } from "lucide-react";
-import { NextPage } from "next";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, forwardRef, useState } from "react";
 import { api } from "~/trpc/react";
 import TextHeaders from "../textHeaders/textHeaders";
 
@@ -12,7 +11,7 @@ type FormFields = {
   message: string;
 };
 
-const ContactMe: NextPage = (): JSX.Element => {
+const ContactMe = forwardRef<HTMLDivElement, {}>((props, ref): JSX.Element => {
   const addVisitor = api.visitor.addVisitor.useMutation();
   const [formFieldValues, setFormFieldValues] = useState<FormFields>({
     name: "",
@@ -39,8 +38,9 @@ const ContactMe: NextPage = (): JSX.Element => {
 
   return (
     <div
-      className="mx-auto w-full max-w-full rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40 md:w-3/5"
+      className="mx-auto w-full max-w-full rounded-2xl border border-zinc-100 p-6 pt-2 dark:border-zinc-700/40 md:w-3/5"
       id="contactme"
+      ref={ref}
     >
       <div className="flex h-full w-full flex-col items-start justify-center gap-8">
         <div className="flex w-full flex-row justify-start gap-4">
@@ -126,6 +126,6 @@ const ContactMe: NextPage = (): JSX.Element => {
       </div>
     </div>
   );
-};
+});
 
 export default ContactMe;

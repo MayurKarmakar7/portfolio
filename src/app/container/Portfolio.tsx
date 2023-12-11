@@ -10,22 +10,88 @@ import Skills from "../_components/Skills/Skills";
 import Introduction from "../_components/intro/intro";
 import Header from "../_components/Header/Header";
 import Footer from "../_components/Footer/Footer";
+import { useRef } from "react";
 
 const Portfolio: NextPage = (): JSX.Element => {
+  const introductionRef = useRef<HTMLDivElement | null>(null);
+  const skillsRef = useRef<HTMLDivElement | null>(null);
+  const experienceRef = useRef<HTMLDivElement | null>(null);
+  const projectsRef = useRef<HTMLDivElement | null>(null);
+  const educationRef = useRef<HTMLDivElement | null>(null);
+  const certificationRef = useRef<HTMLDivElement | null>(null);
+  const contactmeRef = useRef<HTMLDivElement | null>(null);
+
+  const handleScrollIntoView = (
+    view:
+      | "skills"
+      | "education"
+      | "experience"
+      | "projects"
+      | "certification"
+      | "contactme",
+  ) => {
+    switch (view) {
+      case "skills":
+        if (skillsRef.current) {
+          skillsRef.current.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+        break;
+      case "certification":
+        if (certificationRef.current) {
+          certificationRef.current.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+        break;
+      case "contactme":
+        if (contactmeRef.current) {
+          contactmeRef.current.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+        break;
+      case "education":
+        if (educationRef.current) {
+          educationRef.current.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+        break;
+      case "experience":
+        if (experienceRef.current) {
+          experienceRef.current.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+        break;
+      case "projects":
+        if (projectsRef.current) {
+          projectsRef.current.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="flex h-full flex-col gap-16 md:gap-24">
-      <Header />
+      <Header scrollIntoView={handleScrollIntoView} />
       <div
-        className="flex h-full w-full flex-col items-center justify-center gap-32 overflow-x-hidden"
+        className="flex h-full w-full flex-col items-center justify-center gap-32"
         id="about"
       >
-        <Introduction />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Education />
-        <Certifications />
-        <ContactMe />
+        <Introduction ref={introductionRef} />
+        <Skills ref={skillsRef} />
+        <Experience ref={experienceRef} />
+        <Projects ref={projectsRef} />
+        <Education ref={educationRef} />
+        <Certifications ref={certificationRef} />
+        <ContactMe ref={contactmeRef} />
       </div>
       <Footer />
     </div>

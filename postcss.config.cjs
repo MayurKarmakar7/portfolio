@@ -2,8 +2,9 @@ const config = {
   plugins: {
     tailwindcss: {},
     autoprefixer: {},
-    // 'tailwindcss/nesting': {},
-    "postcss-preset-mantine": {},
+    'postcss-import': {},
+    'tailwindcss/nesting': 'postcss-nesting',
+    // "postcss-preset-mantine": {},
     "postcss-simple-vars": {
       variables: {
         "mantine-breakpoint-xs": "36em",

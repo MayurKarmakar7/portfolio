@@ -1,8 +1,7 @@
 "use client";
 
 import { Tooltip } from "@mantine/core";
-import { NextPage } from "next";
-import { ForwardedRef, forwardRef, useRef } from "react";
+import { ForwardedRef, forwardRef } from "react";
 import Antd from "../../../assets/logos/antd.png";
 import Axios from "../../../assets/logos/axios.png";
 import Drizzle from "../../../assets/logos/drizzle.jpg";
@@ -35,9 +34,7 @@ type SkillSet = {
 type ImageContainersCombinedProps = ImageContainersProps &
   React.HTMLProps<HTMLDivElement>;
 
-const Skills: NextPage = (): JSX.Element => {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
+const Skills = forwardRef<HTMLDivElement, {}>((props, ref): JSX.Element => {
   const others: SkillSet[] = [
     { name: "framemotion", imageUrl: FramerMotion.src },
     { name: "socketio", imageUrl: SocketIo.src },
@@ -79,11 +76,9 @@ const Skills: NextPage = (): JSX.Element => {
 
   return (
     <div
-      className="flex h-full w-full flex-col items-start justify-center gap-8 pt-8"
-      ref={(el) => {
-        containerRef.current = el;
-      }}
+      className="flex h-full w-full flex-col items-start justify-center gap-8 pt-2"
       id="skills"
+      ref={ref}
     >
       <div className="flex h-full w-full flex-row items-center justify-start gap-4">
         <svg
@@ -303,7 +298,7 @@ const Skills: NextPage = (): JSX.Element => {
       </div>
     </div>
   );
-};
+});
 
 const ImageContainers = forwardRef(
   (

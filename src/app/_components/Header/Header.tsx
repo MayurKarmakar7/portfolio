@@ -1,24 +1,89 @@
-import { Button } from "@mantine/core";
+import { Button, Modal } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import { NextPage } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import MayurLogo from "../../../assets/images/mayurLogo.jpg";
 
-const Header: NextPage = (): JSX.Element => {
+type NavItemWithIds = {
+  id:
+    | "skills"
+    | "education"
+    | "experience"
+    | "projects"
+    | "certification"
+    | "contactme";
+  name: string;
+};
+
+type HeaderProps = {
+  scrollIntoView: (
+    type:
+      | "skills"
+      | "education"
+      | "experience"
+      | "projects"
+      | "certification"
+      | "contactme",
+  ) => void;
+};
+
+const Header: NextPage<HeaderProps> = ({ scrollIntoView }): JSX.Element => {
+  const [opened, { open, close }] = useDisclosure(false);
+  const navItems: NavItemWithIds[] = [
+    {
+      id: "skills",
+      name: "Skills",
+    },
+    {
+      id: "experience",
+      name: "Experiences",
+    },
+    {
+      id: "projects",
+      name: "Projects",
+    },
+    {
+      id: "education",
+      name: "Education",
+    },
+    {
+      id: "certification",
+      name: "Certifications",
+    },
+    {
+      id: "contactme",
+      name: "Contact me",
+    },
+  ];
+
+  const handleRouteToSection = (
+    id:
+      | "skills"
+      | "education"
+      | "experience"
+      | "projects"
+      | "certification"
+      | "contactme",
+  ) => {
+    close();
+    scrollIntoView(id);
+    // navigate(`#${id}`);
+  };
   const handleMenuOpen = () => {
-    console.log("handleMenuOpen");
     open();
   };
   return (
     <div className="flex h-16 w-full flex-row justify-between pt-6">
       <div className="mr-auto w-full md:hidden">
         <div className="mr-auto h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10">
-          <a aria-label="Home" href="/">
+          <Link aria-label="Home" href="#about">
             <Image
               src={MayurLogo}
               alt={"Mayur"}
-              className="h-9 w-9 cursor-pointer rounded-full bg-transparent bg-zinc-100 object-cover dark:bg-zinc-800"
+              className="h-9 w-9 rounded-full bg-transparent bg-zinc-100 object-cover dark:bg-zinc-800"
             />
-          </a>
+          </Link>
         </div>
       </div>
       <div className="ml-auto block md:hidden">
@@ -83,6 +148,32 @@ const Header: NextPage = (): JSX.Element => {
           </ul>
         </nav>
       </div>
+      <Modal
+        opened={opened}
+        onClose={close}
+        title="Navigation"
+        className="bg-opacity-0 "
+        styles={{
+          content: {
+            borderRadius: "1.5rem",
+            padding: "0% 5%",
+          },
+        }}
+      >
+        <div className="flex h-full flex-col gap-2 divide-y divide-zinc-100 dark:divide-zinc-100/5">
+          {navItems.map((item: NavItemWithIds, index: number) => {
+            return (
+              <p
+                className="block cursor-pointer py-2 text-base"
+                key={index}
+                onClick={() => handleRouteToSection(item.id)}
+              >
+                {item.name}
+              </p>
+            );
+          })}
+        </div>
+      </Modal>
     </div>
   );
 };

@@ -6,7 +6,7 @@ const Text: React.ForwardRefRenderFunction<
 > = ({ children, ...props }): JSX.Element => {
   return (
     <p
-      className="break-before-all text-xl shadow-indigo-500/50 text-shadow-[0_4px_8px_var(--tw-shadow-color)]"
+      className="break-before-all text-xl shadow-indigo-500/50"
       {...props}
     >
       {children}

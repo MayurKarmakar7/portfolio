@@ -17,7 +17,7 @@ const Footer: NextPage = (): JSX.Element => {
                   </a>
                   <a
                     className="tracking-wide transition hover:text-teal-500 dark:hover:text-teal-400"
-                    href="#about"
+                    href="#skills"
                   >
                     Skills
                   </a>

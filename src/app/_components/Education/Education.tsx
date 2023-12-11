@@ -1,16 +1,12 @@
-import { NextPage } from "next";
-import { useRef } from "react";
+import { forwardRef } from "react";
 import TextHeaders from "../textHeaders/textHeaders";
 
-const Education: NextPage = (): JSX.Element => {
-  const parentDivRef = useRef<HTMLDivElement | null>(null);
+const Education = forwardRef<HTMLDivElement, {}>((props, ref): JSX.Element => {
 
   return (
     <div
-      className="flex min-h-full w-full flex-col items-start justify-center gap-8"
-      ref={(el) => {
-        parentDivRef.current = el;
-      }}
+      className="flex min-h-full w-full flex-col items-start justify-center gap-8 pt-2"
+      ref={ref}
       id="education"
     >
       <div className="flex h-full w-full flex-row items-center justify-start gap-4">
@@ -75,6 +71,6 @@ const Education: NextPage = (): JSX.Element => {
       </section>
     </div>
   );
-};
+});
 
 export default Education;

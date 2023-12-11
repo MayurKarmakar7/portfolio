@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { useRef } from "react";
+import { forwardRef } from "react";
 import CP from "../../../assets/logos/collegePapers.png";
 import CowinHistory from "../../../assets/logos/cowinHistory.jpg";
 import DjangoRF from "../../../assets/logos/djangoRF.png";
@@ -32,8 +32,7 @@ type ProjectContainerProps = {
   techImageUrls: string[];
 };
 
-const Projects: NextPage = (): JSX.Element => {
-  const triggerContainerRef = useRef<HTMLDivElement | null>(null);
+const Projects = forwardRef<HTMLDivElement, {}>((props, ref): JSX.Element => {
   const projectDetails: ProjectDetails[] = [
     {
       name: "CowinHistory",
@@ -85,11 +84,9 @@ const Projects: NextPage = (): JSX.Element => {
 
   return (
     <div
-      className="flex h-full w-full flex-col items-start justify-center gap-8"
-      ref={(el) => {
-        triggerContainerRef.current = el;
-      }}
+      className="flex h-full w-full flex-col items-start justify-center gap-8 pt-2"
       id="projects"
+      ref={ref}
     >
       <div className="flex h-full w-full flex-row items-center justify-start gap-4">
         <svg
@@ -124,7 +121,7 @@ const Projects: NextPage = (): JSX.Element => {
       </div>
     </div>
   );
-};
+});
 
 const ProjectContainer: NextPage<ProjectContainerProps> = ({
   imageUrl,

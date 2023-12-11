@@ -1,6 +1,5 @@
 "use client";
-import { NextPage } from "next";
-import { useRef } from "react";
+import { forwardRef } from "react";
 import BesecureLogo from "../../../assets/images/bsecurelogo.png";
 import Carelogiq from "../../../assets/images/carelogiq.png";
 import TextHeaders from "../textHeaders/textHeaders";
@@ -14,8 +13,7 @@ type ExperienceDescriptionProps = {
   name: string;
 };
 
-const Experience: NextPage = (): JSX.Element => {
-  const containerRef = useRef<HTMLDivElement | null>(null);
+const Experience = forwardRef<HTMLDivElement, {}>((props, ref): JSX.Element => {
   const experienceDescription: ExperienceDescriptionProps[] = [
     {
       header:
@@ -59,7 +57,7 @@ const Experience: NextPage = (): JSX.Element => {
   ) => {
     return (
       <div
-        className="flex h-auto w-auto flex-col rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40"
+        className="flex h-auto w-auto flex-col rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40 pt-2"
         key={index}
       >
         <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-transparent bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
@@ -74,7 +72,6 @@ const Experience: NextPage = (): JSX.Element => {
             src={imageUrl}
           />
         </div>
-        <span className="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl"></span>
         <span className="relative z-10 mt-6 text-base font-semibold tracking-wide text-zinc-800 dark:text-zinc-100">
           {name}
         </span>
@@ -116,7 +113,7 @@ const Experience: NextPage = (): JSX.Element => {
   return (
     <div
       className="flex h-full w-full flex-col items-start justify-center gap-8"
-      ref={(el) => (containerRef.current = el)}
+      ref={ref}
       id="experience"
     >
       <div className="flex h-full w-full flex-row items-center justify-start gap-4">
@@ -134,19 +131,6 @@ const Experience: NextPage = (): JSX.Element => {
         </svg>
         <TextHeaders id="experienceHeader">Experiences</TextHeaders>
       </div>
-      <div className="max-w-full">
-        <div className="mr-auto w-full md:w-4/5">
-          <p
-            className="h-hull w-full break-before-all text-left text-base tracking-wider text-zinc-600 dark:text-zinc-400"
-            id="slogan"
-          >
-            In my 2years at Beyond Exam, I was a team member where I leveraged
-            my communication skills to communicate, gather, and convey my
-            thoughts to and from the offshore team members and drove the concept
-            of this featureful Web-based softwares to release.
-          </p>
-        </div>
-      </div>
       <div className="flex h-auto flex-col gap-8 md:w-full md:flex-row md:justify-start">
         {experiences.map((item: ExperienceDescriptionProps, index: number) => {
           return formatDescription(
@@ -161,6 +145,6 @@ const Experience: NextPage = (): JSX.Element => {
       </div>
     </div>
   );
-};
+});
 
 export default Experience;
