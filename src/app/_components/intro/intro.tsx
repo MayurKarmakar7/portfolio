@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import MayurLogo from "../../../assets/images/mayurLogo.jpg";
 import Link from "next/link";
 
-const Introduction = forwardRef<HTMLDivElement, {}>(
+const Introduction = forwardRef<HTMLDivElement>(
   (props, ref): JSX.Element => {
     return (
       <div

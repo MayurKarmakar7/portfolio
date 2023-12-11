@@ -33,6 +33,7 @@
     "react-dom": "18.2.0",
     "sass": "^1.69.5",
     "server-only": "^0.0.1",
+    "sharp": "^0.33.0",
     "split-type": "^0.3.4",
     "superjson": "^2.2.1",
     "zod": "^3.22.4"
