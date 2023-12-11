@@ -3,6 +3,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
+// import Resume from "../../../assets/docs/mayur_karmakar_resume.pdf"
 import MayurLogo from "../../../assets/images/mayurLogo.jpg";
 
 type NavItemWithIds = {
@@ -12,7 +13,8 @@ type NavItemWithIds = {
     | "experience"
     | "projects"
     | "certification"
-    | "contactme";
+    | "contactme"
+    | "";
   name: string;
 };
 
@@ -24,7 +26,8 @@ type HeaderProps = {
       | "experience"
       | "projects"
       | "certification"
-      | "contactme",
+      | "contactme"
+      | "",
   ) => void;
 };
 
@@ -55,6 +58,10 @@ const Header: NextPage<HeaderProps> = ({ scrollIntoView }): JSX.Element => {
       id: "contactme",
       name: "Contact me",
     },
+    {
+      id: "",
+      name: "Contact me",
+    },
   ];
 
   const handleRouteToSection = (
@@ -64,7 +71,8 @@ const Header: NextPage<HeaderProps> = ({ scrollIntoView }): JSX.Element => {
       | "experience"
       | "projects"
       | "certification"
-      | "contactme",
+      | "contactme"
+      | "",
   ) => {
     close();
     scrollIntoView(id);
@@ -162,6 +170,13 @@ const Header: NextPage<HeaderProps> = ({ scrollIntoView }): JSX.Element => {
       >
         <div className="flex h-full flex-col gap-2 divide-y divide-zinc-100 dark:divide-zinc-100/5">
           {navItems.map((item: NavItemWithIds, index: number) => {
+            // if (!item.id) {
+            //   return (
+            //     <Link href={Resume} download={"mayur_karmakar_resume.pdf"}>
+            //       Resume
+            //     </Link>
+            //   );
+            // }
             return (
               <p
                 className="block cursor-pointer py-2 text-base"

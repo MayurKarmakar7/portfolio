@@ -11,7 +11,7 @@ type FormFields = {
   message: string;
 };
 
-const ContactMe = forwardRef<HTMLDivElement, {}>((props, ref): JSX.Element => {
+const ContactMe = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
   const addVisitor = api.visitor.addVisitor.useMutation();
   const [formFieldValues, setFormFieldValues] = useState<FormFields>({
     name: "",

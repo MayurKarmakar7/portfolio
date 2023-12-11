@@ -34,7 +34,7 @@ type SkillSet = {
 type ImageContainersCombinedProps = ImageContainersProps &
   React.HTMLProps<HTMLDivElement>;
 
-const Skills = forwardRef<HTMLDivElement, {}>((props, ref): JSX.Element => {
+const Skills = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
   const others: SkillSet[] = [
     { name: "framemotion", imageUrl: FramerMotion.src },
     { name: "socketio", imageUrl: SocketIo.src },

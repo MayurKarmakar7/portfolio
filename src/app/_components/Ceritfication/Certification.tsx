@@ -10,7 +10,7 @@ type Certifications = {
   courseName: string;
 };
 
-const Certifications = forwardRef<HTMLDivElement, {}>(
+const Certifications = forwardRef<HTMLDivElement>(
   (props, ref): JSX.Element => {
     const certifications: Certifications[] = [
       {

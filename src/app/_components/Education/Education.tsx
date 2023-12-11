@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import TextHeaders from "../textHeaders/textHeaders";
 
-const Education = forwardRef<HTMLDivElement, {}>((props, ref): JSX.Element => {
+const Education = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
 
   return (
     <div

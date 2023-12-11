@@ -13,7 +13,7 @@ type ExperienceDescriptionProps = {
   name: string;
 };
 
-const Experience = forwardRef<HTMLDivElement, {}>((props, ref): JSX.Element => {
+const Experience = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
   const experienceDescription: ExperienceDescriptionProps[] = [
     {
       header:
