@@ -28,7 +28,7 @@ const Portfolio: NextPage = (): JSX.Element => {
       | "experience"
       | "projects"
       | "certification"
-      | "contactme",
+      | "contactme"| "",
   ) => {
     switch (view) {
       case "skills":
