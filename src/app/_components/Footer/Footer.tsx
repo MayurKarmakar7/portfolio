@@ -1,6 +1,35 @@
 import { NextPage } from "next";
 
-const Footer: NextPage = (): JSX.Element => {
+type FooterProps = {
+  scrollIntoView: (
+    type:
+      | "skills"
+      | "education"
+      | "experience"
+      | "projects"
+      | "certification"
+      | "contactme"
+      | "introduction"
+      | "",
+  ) => void;
+};
+
+const Footer: NextPage<FooterProps> = ({ scrollIntoView }): JSX.Element => {
+  const handleRouteToSection = (
+    id:
+      | "skills"
+      | "education"
+      | "experience"
+      | "projects"
+      | "certification"
+      | "contactme"
+      | "introduction"
+      | "",
+  ) => {
+    close();
+    scrollIntoView(id);
+  };
+
   return (
     <footer className="mt-20 flex-none">
       <div className="w-full max-w-full">
@@ -9,36 +38,36 @@ const Footer: NextPage = (): JSX.Element => {
             <div className="mx-auto max-w-2xl lg:max-w-5xl">
               <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
                 <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200">
-                  <a
-                    className="tracking-wide transition hover:text-teal-500 dark:hover:text-teal-400"
-                    href="#about"
+                  <p
+                    className="cursor-pointer tracking-wide transition hover:text-teal-500 dark:hover:text-teal-400"
+                    onClick={() => handleRouteToSection("introduction")}
                   >
                     About
-                  </a>
-                  <a
-                    className="tracking-wide transition hover:text-teal-500 dark:hover:text-teal-400"
-                    href="#skills"
+                  </p>
+                  <p
+                    className="cursor-pointer tracking-wide transition hover:text-teal-500 dark:hover:text-teal-400"
+                    onClick={() => handleRouteToSection("skills")}
                   >
                     Skills
-                  </a>
-                  <a
-                    className="tracking-wide transition hover:text-teal-500 dark:hover:text-teal-400"
-                    href="#experience"
+                  </p>
+                  <p
+                    className="cursor-pointer tracking-wide transition hover:text-teal-500 dark:hover:text-teal-400"
+                    onClick={() => handleRouteToSection("experience")}
                   >
                     Experience
-                  </a>
-                  <a
-                    className="tracking-wide transition hover:text-teal-500 dark:hover:text-teal-400"
-                    href="#projects"
+                  </p>
+                  <p
+                    className="cursor-pointer tracking-wide transition hover:text-teal-500 dark:hover:text-teal-400"
+                    onClick={() => handleRouteToSection("projects")}
                   >
                     Projects
-                  </a>
-                  <a
-                    className="tracking-wide transition hover:text-teal-500 dark:hover:text-teal-400"
-                    href="#certification"
+                  </p>
+                  <p
+                    className="cursor-pointer tracking-wide transition hover:text-teal-500 dark:hover:text-teal-400"
+                    onClick={() => handleRouteToSection("certification")}
                   >
                     Certifications
-                  </a>
+                  </p>
                 </div>
                 <p className="text-sm text-zinc-400 dark:text-zinc-500">
                   © 2023 Mayur Karmakar. All rights reserved.

@@ -81,7 +81,7 @@ const CertificationItem: NextPage<Certifications> = ({
   courseName,
 }): JSX.Element => {
   return (
-    <div className="flex h-full max-h-full w-full flex-col rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40 md:w-auto">
+    <div className="flex h-full max-h-full w-full flex-col rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40">
       <div className="relative z-10 order-first mb-4 flex items-center pl-3.5 text-base">
         <span
           className="absolute inset-y-0 left-0 flex items-center"

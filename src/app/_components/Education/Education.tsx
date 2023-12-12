@@ -59,7 +59,7 @@ const Education = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
                   >
                     <span className="h-4 w-0.5 rounded-full bg-teal-500 dark:bg-teal-500"></span>
                   </span>
-                  September, 2018 ~ August, 2023
+                  September, 2018 ~ August, 2021
                 </time>
                 <p className="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
                   CGPA - 8.08

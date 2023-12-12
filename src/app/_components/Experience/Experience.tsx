@@ -131,7 +131,7 @@ const Experience = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
         </svg>
         <TextHeaders id="experienceHeader">Experiences</TextHeaders>
       </div>
-      <div className="flex h-auto flex-col gap-8 md:w-full md:flex-row md:justify-start">
+      <div className="flex h-auto flex-col gap-8 md:w-full lg:flex-row md:justify-start">
         {experiences.map((item: ExperienceDescriptionProps, index: number) => {
           return formatDescription(
             item.header,

@@ -1,16 +1,16 @@
 "use client";
 
 import { NextPage } from "next";
+import { useRef } from "react";
 import Certifications from "../_components/Ceritfication/Certification";
 import ContactMe from "../_components/ContactMe/ContactMe";
 import Education from "../_components/Education/Education";
 import Experience from "../_components/Experience/Experience";
+import Footer from "../_components/Footer/Footer";
+import Header from "../_components/Header/Header";
 import Projects from "../_components/Projects/Projects";
 import Skills from "../_components/Skills/Skills";
 import Introduction from "../_components/intro/intro";
-import Header from "../_components/Header/Header";
-import Footer from "../_components/Footer/Footer";
-import { useRef } from "react";
 
 const Portfolio: NextPage = (): JSX.Element => {
   const introductionRef = useRef<HTMLDivElement | null>(null);
@@ -28,7 +28,9 @@ const Portfolio: NextPage = (): JSX.Element => {
       | "experience"
       | "projects"
       | "certification"
-      | "contactme"| "",
+      | "contactme"
+      | "introduction"
+      | "",
   ) => {
     switch (view) {
       case "skills":
@@ -73,6 +75,13 @@ const Portfolio: NextPage = (): JSX.Element => {
           });
         }
         break;
+      case "introduction":
+        if (introductionRef.current) {
+          introductionRef.current.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+        break;
       default:
         break;
     }
@@ -93,7 +102,7 @@ const Portfolio: NextPage = (): JSX.Element => {
         <Certifications ref={certificationRef} />
         <ContactMe ref={contactmeRef} />
       </div>
-      <Footer />
+      <Footer scrollIntoView={handleScrollIntoView} />
     </div>
   );
 };
