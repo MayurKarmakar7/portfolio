@@ -49,7 +49,7 @@ const Introduction = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
           </div>
         </div>
       </div>
-      <div className="my-auto mt-6 flex h-full flex-row justify-center gap-6 md:items-center">
+      <div className="my-auto mt-6 flex h-full flex-row justify-center gap-6 items-center">
         <Link
           className="-m-1 p-1"
           aria-label="Follow on LinkedIn"
