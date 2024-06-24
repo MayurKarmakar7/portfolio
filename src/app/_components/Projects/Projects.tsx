@@ -14,8 +14,10 @@ import ReactRouter from "../../../assets/logos/reactRouter.png";
 import Redux from "../../../assets/logos/redux.png";
 import SciKit from "../../../assets/logos/scikit.png";
 import TensorFL from "../../../assets/logos/tensorFlow.png";
+import Chatbot from "../../../assets/logos/chatbot.png";
 import TextHeaders from "../textHeaders/textHeaders";
 import Link from "next/link";
+import { Globe } from "lucide-react";
 
 type ProjectDetails = {
   header: string;
@@ -24,6 +26,7 @@ type ProjectDetails = {
   logo: string;
   name: string;
   link: string;
+  liveLink: string | null;
 };
 
 type ProjectContainerProps = {
@@ -32,6 +35,7 @@ type ProjectContainerProps = {
   repoLink: string;
   name: string;
   techImageUrls: string[];
+  liveLink: string | null;
 };
 
 const Projects = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
@@ -62,6 +66,7 @@ const Projects = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
       ],
       logo: CowinHistory.src,
       link: "https://github.com/MayurKarmakar7/cowinhistory.git",
+      liveLink: null,
     },
     {
       name: "Collegepapers",
@@ -83,6 +88,18 @@ const Projects = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
       ],
       logo: CP.src,
       link: "https://github.com/MayurKarmakar7/collegepapers.git",
+      liveLink: null,
+    },
+    {
+      name: "Chatbot",
+      header:
+        "ChatBot is an application designed for conversational interactions powered by OpenAI's GPT models. This application provides users with a chat interface to engage in conversations with AI models provided by OpenAI using a simple web interface.",
+      contributions: [],
+      techImages: [],
+      logo: Chatbot.src,
+      link: "https://github.com/MayurKarmakar/Chatbot.git",
+      liveLink:
+        "https://6642007403039c07f38a7718--resonant-arithmetic-596875.netlify.app/",
     },
   ];
 
@@ -119,6 +136,7 @@ const Projects = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
               name={project.name}
               techImageUrls={project.techImages}
               key={index}
+              liveLink={project.liveLink}
             />
           );
         })}
@@ -133,6 +151,7 @@ const ProjectContainer: NextPage<ProjectContainerProps> = ({
   name,
   repoLink,
   techImageUrls,
+  liveLink,
 }): JSX.Element => {
   return (
     <div className="flex h-full max-w-full flex-col rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40">
@@ -144,7 +163,7 @@ const ProjectContainer: NextPage<ProjectContainerProps> = ({
           height="32"
           decoding="async"
           data-nimg="1"
-          className="h-8 w-8 rounded-2xl bg-transparent"
+          className="h-8 w-8 rounded-2xl bg-transparent object-cover"
           src={imageUrl}
         />
       </div>
@@ -154,19 +173,26 @@ const ProjectContainer: NextPage<ProjectContainerProps> = ({
       <p className="relative z-10 mt-2 text-sm leading-6 tracking-wider text-zinc-600 dark:text-zinc-400">
         {description}
       </p>
-      <Link href={repoLink} target="_blank">
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          className="mt-6 h-6 w-6 cursor-pointer fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300"
-        >
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M12 2C6.475 2 2 6.588 2 12.253c0 4.537 2.862 8.369 6.838 9.727.5.09.687-.218.687-.487 0-.243-.013-1.05-.013-1.91C7 20.059 6.35 18.957 6.15 18.38c-.113-.295-.6-1.205-1.025-1.448-.35-.192-.85-.667-.013-.68.788-.012 1.35.744 1.538 1.051.9 1.551 2.338 1.116 2.912.846.088-.666.35-1.115.638-1.371-2.225-.256-4.55-1.14-4.55-5.062 0-1.115.387-2.038 1.025-2.756-.1-.256-.45-1.307.1-2.717 0 0 .837-.269 2.75 1.051.8-.23 1.65-.346 2.5-.346.85 0 1.7.115 2.5.346 1.912-1.333 2.75-1.05 2.75-1.05.55 1.409.2 2.46.1 2.716.637.718 1.025 1.628 1.025 2.756 0 3.934-2.337 4.806-4.562 5.062.362.32.675.936.675 1.897 0 1.371-.013 2.473-.013 2.82 0 .268.188.589.688.486a10.039 10.039 0 0 0 4.932-3.74A10.447 10.447 0 0 0 22 12.253C22 6.588 17.525 2 12 2Z"
-          ></path>
-        </svg>
-      </Link>
+      <div className="flex w-full justify-start gap-5 items-end">
+        <Link href={repoLink} target="_blank">
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            className="mt-6 h-6 w-6 cursor-pointer fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300"
+          >
+            <path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M12 2C6.475 2 2 6.588 2 12.253c0 4.537 2.862 8.369 6.838 9.727.5.09.687-.218.687-.487 0-.243-.013-1.05-.013-1.91C7 20.059 6.35 18.957 6.15 18.38c-.113-.295-.6-1.205-1.025-1.448-.35-.192-.85-.667-.013-.68.788-.012 1.35.744 1.538 1.051.9 1.551 2.338 1.116 2.912.846.088-.666.35-1.115.638-1.371-2.225-.256-4.55-1.14-4.55-5.062 0-1.115.387-2.038 1.025-2.756-.1-.256-.45-1.307.1-2.717 0 0 .837-.269 2.75 1.051.8-.23 1.65-.346 2.5-.346.85 0 1.7.115 2.5.346 1.912-1.333 2.75-1.05 2.75-1.05.55 1.409.2 2.46.1 2.716.637.718 1.025 1.628 1.025 2.756 0 3.934-2.337 4.806-4.562 5.062.362.32.675.936.675 1.897 0 1.371-.013 2.473-.013 2.82 0 .268.188.589.688.486a10.039 10.039 0 0 0 4.932-3.74A10.447 10.447 0 0 0 22 12.253C22 6.588 17.525 2 12 2Z"
+            ></path>
+          </svg>
+        </Link>
+        {liveLink && (
+          <Link href={liveLink} target="_blank">
+            <Globe height={"1.5rem"} width={"1.5rem"} color="#a1a1aa"/>
+          </Link>
+        )}
+      </div>
     </div>
   );
 };

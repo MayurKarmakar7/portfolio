@@ -3,7 +3,6 @@
 import { NextPage } from "next";
 import { useRef } from "react";
 import Certifications from "../_components/Ceritfication/Certification";
-import ContactMe from "../_components/ContactMe/ContactMe";
 import Education from "../_components/Education/Education";
 import Experience from "../_components/Experience/Experience";
 import Footer from "../_components/Footer/Footer";
@@ -100,7 +99,6 @@ const Portfolio: NextPage = (): JSX.Element => {
         <Projects ref={projectsRef} />
         <Education ref={educationRef} />
         <Certifications ref={certificationRef} />
-        <ContactMe ref={contactmeRef} />
       </div>
       <Footer scrollIntoView={handleScrollIntoView} />
     </div>
