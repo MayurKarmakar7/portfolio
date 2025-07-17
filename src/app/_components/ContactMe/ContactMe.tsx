@@ -41,6 +41,7 @@ function ContactForm({ visible, handleSumit, loading }: ContactFormProps) {
       email: "",
       message: "",
     },
+    mode: 'controlled',
     validate: {
       name: (value) =>
         value.length < 2 ? "Name must be at least 2 characters" : null,
@@ -68,6 +69,7 @@ function ContactForm({ visible, handleSumit, loading }: ContactFormProps) {
           <TextInput
             withAsterisk
             type="text"
+            key={form.key("name")}
             {...form.getInputProps("name")}
             placeholder="Your Name"
           />
@@ -83,6 +85,7 @@ function ContactForm({ visible, handleSumit, loading }: ContactFormProps) {
             withAsterisk
             type="email"
             id="email"
+            key={form.key("email")}
             {...form.getInputProps("email")}
             placeholder="your@email.com"
             leftSection={<MailIcon className="h-4 w-4" />}
@@ -97,6 +100,9 @@ function ContactForm({ visible, handleSumit, loading }: ContactFormProps) {
           </label>
           <Textarea
             placeholder="Write your thoughts here..."
+            withAsterisk
+            id="message"
+            key={form.key("message")}
             {...form.getInputProps("message")}
             rows={8}
           />
