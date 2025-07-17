@@ -1,7 +1,5 @@
 "use client";
 import { forwardRef } from "react";
-import BesecureLogo from "../../../assets/images/bsecurelogo.png";
-import Carelogiq from "../../../assets/images/carelogiq.png";
 import TextHeaders from "../textHeaders/textHeaders";
 import "./Experience.module.css";
 
@@ -9,7 +7,6 @@ type ExperienceDescriptionProps = {
   header: string;
   responsibilites: string[];
   footer: string;
-  imageUrl: string;
   name: string;
 };
 
@@ -17,32 +14,55 @@ const Experience = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
   const experienceDescription: ExperienceDescriptionProps[] = [
     {
       header:
-        "As a Tech Lead and senior React Developer at Beyond Exam (an Edtech SAAS), I have grown from an individual contributor on small systems to a technical lead on this project.",
+        "A web application that transforms text and files into quizzes using OpenAI's GPT services.",
       responsibilites: [
-        "Revamped UI for Beyond Exam",
-        "Integrated WebRTC for live video conferences",
-        "Built a robust chat system",
-        "Enhanced UI for robustness and user experience",
-        "Implemented features to detect and safeguard online assessments from cheating",
-        "Managed time-based exam windows",
+        "Built a full-stack web application using Next.js, React, and Drizzle ORM to generate quizzes from user inputs and uploaded documents (PDF, DOCX).",
+        "Developed user-friendly and responsive UI components using Mantine and Tailwind CSS to capture and manage diverse user inputs.",
+        "Designed API flows to send content to a GPT-based question generation service and render structured quiz outputs in the UI.",
+        "Implemented secure backend endpoints for managing user content, request payloads, and database transactions using Drizzle ORM.",
+        "Integrated Clerk for authentication and protected route handling, supporting personalized quiz experiences.",
+        "Focused on seamless user experience by optimizing content parsing, API integration, and result rendering across devices.",
       ],
-      imageUrl: BesecureLogo.src,
-      name: "BSecure",
-      footer:
-        "In my 2years at Beyond Exam, I was a team member where I leveraged my communication skills to communicate, gather, and convey my thoughts to and from the offshore team members and drove the concept of this featureful Web-based Edtech software to release.",
+      name: "Content2Quiz",
+      footer: "",
     },
     {
       header:
-        "I, as a senior React Developer of the Frontend team involved in leading, coordinating, and contributing to the project alongside other team members. Additionally, I applied my knowledge in React Native to maintain and develop the Android and IOS apps for this project.",
+        "A self-contained educational technology platform for online proctoring and exam management, offering a personalized, flexible, scalable, inclusive, and non-intrusive solution that initiates the proctoring process.",
       responsibilites: [
-        "Debugged code that displayed incorrect diagnosis dates for the patient",
-        "Improved and updated code to preprocess patient diagnosis data for data visualization",
-        "Implemented a screen to display analytical information related to a patient's vital signs",
-        "Fixed app crashes on Android and iOS devices",
-        "Added page scrolling for form fields on Ant Design (antd) when validation errors occur",
+        "Implemented a comprehensive set of proctoring features including live video and screen recording, AI-powered face and object detection, audio monitoring, and real-time violation alerts to ensure exam integrity.",
+        "Developed a scalable exam management platform with configurable quiz settings, Canvas-integrated assignment handling, dynamic scheduling, real-time countdown timers, automatic submission logic, and post-exam review functionality for instructors and students.",
+        "Developed a modular user management system with role-based access control (RBAC), enabling customized experiences for students, instructors, proctors, and admins—complete with dashboard views, progress insights, and profile configuration.",
+        "Integrated interactive exam features including live support chat, real-time messaging between students and proctors, video conferencing via OpenVidu, a help system for technical/general support, and instant violation reporting with alerts.",
+        "Implemented real-time communication with Socket.IO, video/audio streaming using WebRTC, AI services for automated monitoring, and Paypal integration for payment processing.",
+      ],
+      name: "Bsecure Pro",
+      footer: "",
+    },
+    {
+      header:
+        "An Educational Technology Platform focused on Online Proctoring and Exam Management. Implement features that provide secure online examination solutions with AI-powered proctoring capabilities and seamlessly integrate with any application such as an LMS or test engine to execute secure online examinations with AI-powered proctoring capabilities.",
+      responsibilites: [
+        "Revamped legacy UI",
+        "Implemented a comprehensive set of proctoring features including live video and screen recording, AI-powered face and object detection, audio monitoring, and real-time violation alerts to ensure exam integrity.",
+        "Developed an exam management platform with configurable quiz settings, Canvas-integrated assignment handling, dynamic scheduling, real-time countdown timers, automatic submission logic, and post-exam review functionality for instructors and students.",
+        "Integrated interactive exam features including live support chat, real-time messaging between students and proctors, video conferencing via OpenVidu, a help system for technical/general support, and instant violation reporting with alerts.",
+        "Implemented real-time communication with Socket.IO, video/audio streaming using WebRTC, AI services for automated monitoring.",
+        "Managed time-based exam windows",
+      ],
+      name: "Examd - Canvas",
+      footer: "",
+    },
+    {
+      header:
+        "A chronic disease management solution that is compliant with HIPAA, and enables health care organizations to reduce costs, and successfully assume risk in value-based contracts.",
+      responsibilites: [
+        "Resolved a critical issue in the diagnosis module that caused inaccurate date rendering, ensuring trustworthy clinical insights for patients and care teams.",
+        "Enhanced the data preprocessing pipeline to accurately format and filter patient diagnosis records, enabling clear and effective visual representation in analytical dashboards.",
+        "Designed and implemented a responsive analytics screen that presents key trends in patient vitals, supporting clinicians in making informed healthcare decisions.",
+        "Identified and fixed platform-specific crashes across Android and iOS, improving app stability and critical patient monitoring workflows.",
       ],
       name: "CarelogiQ",
-      imageUrl: Carelogiq.src,
       footer: "",
     },
   ];
@@ -52,26 +72,13 @@ const Experience = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
     responsibilites: string[],
     footer: string,
     index: number,
-    imageUrl: string,
     name: string,
   ) => {
     return (
       <div
-        className="flex h-auto w-auto flex-col rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40 pt-2"
+        className="flex h-auto w-auto flex-col rounded-2xl border border-zinc-100 p-6 pt-2 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40"
         key={index}
       >
-        <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-transparent bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-          <img
-            alt=""
-            loading="lazy"
-            width="32"
-            height="32"
-            decoding="async"
-            data-nimg="1"
-            className="h-8 w-8"
-            src={imageUrl}
-          />
-        </div>
         <span className="relative z-10 mt-6 text-base font-semibold tracking-wide text-zinc-800 dark:text-zinc-100">
           {name}
         </span>
@@ -89,10 +96,10 @@ const Experience = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
             </p>
           </div>
         </div> */}
-        <span className="relative z-10 mt-6 text-base font-semibold tracking-wide text-zinc-800 dark:text-zinc-100">
+        <span className="relative z-10 mt-6 text-base tracking-wide text-zinc-800 dark:text-zinc-100/80">
           Key Responsibilities
         </span>
-        <ul className="relative z-10 ml-4 mt-2 list-outside list-disc text-sm tracking-wide text-zinc-600 dark:text-zinc-400">
+        <ul className="relative z-10 ml-4 mt-2 max-h-36 list-outside list-disc overflow-y-auto text-sm tracking-wide text-zinc-600 dark:text-zinc-400">
           {responsibilites.map((item: string, index: number) => (
             <li className="ml-4 list-item break-before-all" key={index}>
               {item}
@@ -131,14 +138,13 @@ const Experience = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
         </svg>
         <TextHeaders id="experienceHeader">Experiences</TextHeaders>
       </div>
-      <div className="flex h-auto flex-col gap-8 md:w-full lg:flex-row md:justify-start">
+      <div className="grid h-auto gap-8 md:w-full lg:grid-cols-2">
         {experiences.map((item: ExperienceDescriptionProps, index: number) => {
           return formatDescription(
             item.header,
             item.responsibilites,
             item.footer,
             index,
-            item.imageUrl,
             item.name,
           );
         })}

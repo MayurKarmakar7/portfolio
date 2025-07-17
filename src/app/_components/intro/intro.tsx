@@ -1,7 +1,7 @@
 "use client";
+import Link from "next/link";
 import { forwardRef } from "react";
 import MayurLogo from "../../../assets/images/mayurLogo.jpg";
-import Link from "next/link";
 
 const Introduction = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
   return (
@@ -24,7 +24,7 @@ const Introduction = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
               className="text-3xl font-bold leading-10 text-zinc-800 dark:text-zinc-100 sm:text-5xl md:leading-normal"
               id="tagline"
             >
-              ReactJS Developer, Senior Front-end Engineer, and Web Development
+              Full-Stack Developer | React & Next.js Focused | Web Development
               Enthusiast
             </h1>
           </div>
@@ -36,20 +36,21 @@ const Introduction = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
                   lineHeight: "2rem",
                 }}
               >
-                I am Mayur Karmakar, a Senior Frontend Developer at Beyond Exam.
-                I have two years of hands-on experience working with a versatile
-                toolset, including ReactJS, NextJS, Redux, Zustand, Typescript,
-                WebRTC Apis, TRPC and UI frameworks such as Ant Design,
-                Material-UI, and Mantine. I have collaborated with a talented
-                and diverse team of developers, designers, and educators, and I
-                always strive to deliver solutions that not only meet but exceed
-                client expectations.
+                I am Mayur Karmakar, a Full-Stack Developer with 4 years of
+                hands-on experience building high-performance web applications.
+                I specialize in modern frontend and backend technologies,
+                including ReactJS, NextJS, and TypeScript. My versatile skill
+                set also includes Redux, Zustand, WebRTC APIs, tRPC, and UI
+                libraries such as Ant Design, Material-UI, and Mantine. I've
+                collaborated with diverse teams of developers, designers, and
+                educators to deliver solutions that consistently exceed client
+                expectations.
               </p>
             </div>
           </div>
         </div>
       </div>
-      <div className="my-auto mt-6 flex h-full flex-row justify-center gap-6 items-center">
+      <div className="my-auto mt-6 flex h-full flex-row items-center justify-center gap-6">
         <Link
           className="-m-1 p-1"
           aria-label="Follow on LinkedIn"
