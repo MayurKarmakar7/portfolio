@@ -19,6 +19,42 @@ export const visitorRouter = createTRPCRouter({
         message: input.message,
       });
     }),
+
+  sendContactEmail: publicProcedure
+    .input(
+      z.object({
+        userName: z.string().max(256),
+        userEmail: z.string().email(),
+        userMessage: z.string().min(1),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      const { userName, userEmail, userMessage } = input;
+
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/send-contact-mail`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userName,
+            userEmail,
+            userMessage,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to send email");
+        }
+
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error("Error sending contact email:", error);
+        throw new Error("Failed to send contact email");
+      }
+    }),
 });
 
-export type VisitorRouter = typeof visitorRouter
+export type VisitorRouter = typeof visitorRouter;

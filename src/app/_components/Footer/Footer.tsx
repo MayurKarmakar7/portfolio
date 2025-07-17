@@ -70,7 +70,7 @@ const Footer: NextPage<FooterProps> = ({ scrollIntoView }): JSX.Element => {
                   </p>
                 </div>
                 <p className="text-sm text-zinc-400 dark:text-zinc-500">
-                  © 2023 Mayur Karmakar. All rights reserved.
+                  © {new Date().getFullYear()} Mayur Karmakar. All rights reserved.
                 </p>
               </div>
             </div>

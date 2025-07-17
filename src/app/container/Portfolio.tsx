@@ -10,6 +10,7 @@ import Header from "../_components/Header/Header";
 import Projects from "../_components/Projects/Projects";
 import Skills from "../_components/Skills/Skills";
 import Introduction from "../_components/intro/intro";
+import ContactMe from "../_components/ContactMe/ContactMe";
 
 const Portfolio: NextPage = (): JSX.Element => {
   const introductionRef = useRef<HTMLDivElement | null>(null);
@@ -90,7 +91,7 @@ const Portfolio: NextPage = (): JSX.Element => {
     <div className="flex h-full flex-col gap-16 md:gap-24">
       <Header scrollIntoView={handleScrollIntoView} />
       <div
-        className="flex h-full w-full flex-col items-center justify-center gap-32"
+        className="flex flex-col h-full w-full items-center justify-center gap-32"
         id="about"
       >
         <Introduction ref={introductionRef} />
@@ -99,6 +100,7 @@ const Portfolio: NextPage = (): JSX.Element => {
         <Projects ref={projectsRef} />
         <Education ref={educationRef} />
         <Certifications ref={certificationRef} />
+        <ContactMe ref={contactmeRef} />
       </div>
       <Footer scrollIntoView={handleScrollIntoView} />
     </div>
