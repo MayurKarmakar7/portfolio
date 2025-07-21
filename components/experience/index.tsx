@@ -10,7 +10,10 @@ type ExperienceDescriptionProps = {
   name: string;
 };
 
-const Experience = forwardRef<HTMLDivElement>((props, ref) => {
+const Experience = forwardRef<
+  HTMLDivElement,
+  React.HTMLProps<HTMLDivElement>
+>((props, ref) => {
   const experienceDescription: ExperienceDescriptionProps[] = [
     {
       header:
@@ -96,7 +99,7 @@ const Experience = forwardRef<HTMLDivElement>((props, ref) => {
               </li>
             ))}
           </ul>
-          <ScrollBar orientation="vertical" className="ml-2"/>
+          <ScrollBar orientation="vertical" className="ml-2" />
         </ScrollArea>
         {footer && (
           <p className="relative z-10 mt-6 text-sm tracking-wide text-zinc-600 dark:text-zinc-400">
@@ -114,6 +117,7 @@ const Experience = forwardRef<HTMLDivElement>((props, ref) => {
       className="flex h-full w-full flex-col items-start justify-center gap-8"
       ref={ref}
       id="experience"
+      {...props}
     >
       <div className="flex h-full w-full flex-row items-center justify-start gap-4">
         <svg
@@ -144,5 +148,6 @@ const Experience = forwardRef<HTMLDivElement>((props, ref) => {
     </div>
   );
 });
+Experience.displayName = "Experience";
 
 export default Experience;

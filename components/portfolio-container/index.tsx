@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Certifications from "../certification";
+import ContactMe from "../contact-me";
 import Education from "../education";
 import Experience from "../experience";
 import Footer from "../footer";
@@ -9,8 +10,6 @@ import Header from "../header";
 import Introduction from "../introduction";
 import Projects from "../projects";
 import Skills from "../skills";
-import { trpc } from "@/lib/trpc/client";
-import ContactMe from "../contact-me";
 
 function Portfolio() {
   const introductionRef = useRef<HTMLDivElement | null>(null);
@@ -20,11 +19,7 @@ function Portfolio() {
   const educationRef = useRef<HTMLDivElement | null>(null);
   const certificationRef = useRef<HTMLDivElement | null>(null);
   const contactmeRef = useRef<HTMLDivElement | null>(null);
-
-  const greet = trpc.hello.useQuery({ text: "Hello from TRPC!" });
-
-  console.log(greet.data?.greeting);
-
+  
   const handleScrollIntoView = (
     view:
       | "skills"

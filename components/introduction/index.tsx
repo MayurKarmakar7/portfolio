@@ -2,11 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { forwardRef, JSX } from "react";
 
-const Introduction = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
+const Introduction = forwardRef<
+  HTMLDivElement,
+  React.HTMLProps<HTMLDivElement>
+>((props, ref): JSX.Element => {
   return (
     <div
       className="m-auto flex h-full w-full flex-col items-start overflow-hidden pt-2"
       ref={ref}
+      {...props}
     >
       <div
         className="flex h-full w-full flex-col items-start justify-start"
@@ -42,7 +46,7 @@ const Introduction = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
                 I specialize in modern frontend and backend technologies,
                 including ReactJS, NextJS, and TypeScript. My versatile skill
                 set also includes Redux, Zustand, WebRTC APIs, tRPC, and UI
-                libraries such as Ant Design, Material-UI, and Mantine. I've
+                libraries such as Ant Design, Material-UI, and Mantine. I&apos;ve
                 collaborated with diverse teams of developers, designers, and
                 educators to deliver solutions that consistently exceed client
                 expectations.
@@ -125,5 +129,6 @@ const Introduction = forwardRef<HTMLDivElement>((props, ref): JSX.Element => {
     </div>
   );
 });
+Introduction.displayName = "Introduction";
 
 export default Introduction;

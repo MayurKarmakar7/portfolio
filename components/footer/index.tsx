@@ -1,4 +1,3 @@
-import { NextPage } from "next";
 
 type FooterProps = {
   scrollIntoView: (

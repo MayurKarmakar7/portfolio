@@ -1,6 +1,5 @@
-import { type NextPage } from "next";
-import Link from "next/link";
 import { forwardRef } from "react";
+import Link from "next/link";
 import HeaderText from "../header-text";
 
 type Certifications = {
@@ -10,7 +9,7 @@ type Certifications = {
   courseName: string;
 };
 
-const Certifications = forwardRef<HTMLDivElement>((props, ref) => {
+const Certifications = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>((props, ref) => {
   const certifications: Certifications[] = [
     {
       issued: "Mar, 2021",
@@ -31,6 +30,7 @@ const Certifications = forwardRef<HTMLDivElement>((props, ref) => {
       className="flex h-full w-full flex-col items-start justify-center gap-8 pt-2"
       ref={ref}
       id="certification"
+      {...props}
     >
       <div className="flex h-full flex-row items-center justify-start gap-4">
         <svg
@@ -56,23 +56,22 @@ const Certifications = forwardRef<HTMLDivElement>((props, ref) => {
         <HeaderText>Certifications</HeaderText>
       </div>
       <div className="flex h-full w-full flex-row flex-wrap justify-start gap-4">
-        {certifications.map((item: Certifications, index: number) => {
-          return (
-            <CertificationItem
-              key={index}
-              issued={item.issued}
-              certId={item.certId}
-              link={item.link}
-              courseName={item.courseName}
-            />
-          );
-        })}
+        {certifications.map((item: Certifications, index: number) => (
+          <CertificationItem
+            key={index}
+            issued={item.issued}
+            certId={item.certId}
+            link={item.link}
+            courseName={item.courseName}
+          />
+        ))}
       </div>
     </div>
   );
 });
+Certifications.displayName = "Certifications";
 
-const CertificationItem: NextPage<Certifications> = ({
+const CertificationItem: React.FC<Certifications> = ({
   certId,
   issued,
   link,
