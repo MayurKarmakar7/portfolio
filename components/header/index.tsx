@@ -67,7 +67,6 @@ const Header: NextPage<HeaderProps> = ({ scrollIntoView }): JSX.Element => {
       | "contactme"
       | ""
   ) => {
-    close();
     scrollIntoView(id);
   };
 

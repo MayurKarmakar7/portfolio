@@ -25,7 +25,6 @@ function Footer({ scrollIntoView }: FooterProps) {
       | "introduction"
       | ""
   ) => {
-    close();
     scrollIntoView(id);
   };
 
