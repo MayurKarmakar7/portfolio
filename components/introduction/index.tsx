@@ -8,7 +8,7 @@ const Introduction = forwardRef<
 >((props, ref): JSX.Element => {
   return (
     <div
-      className="m-auto flex h-full w-full flex-col items-start overflow-hidden pt-2"
+      className="m-auto flex h-full w-full flex-col items-start pt-2"
       ref={ref}
       {...props}
     >
