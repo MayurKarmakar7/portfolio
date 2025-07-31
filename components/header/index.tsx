@@ -1,8 +1,17 @@
+"use client";
+
 import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { JSX } from "react";
+import { JSX, useState } from "react";
 import { Button } from "../ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
 type NavItemWithIds = {
   id:
@@ -30,6 +39,8 @@ type HeaderProps = {
 };
 
 const Header: NextPage<HeaderProps> = ({ scrollIntoView }): JSX.Element => {
+  const [open, setOpen] = useState(false);
+
   const navItems: NavItemWithIds[] = [
     {
       id: "skills",
@@ -67,11 +78,15 @@ const Header: NextPage<HeaderProps> = ({ scrollIntoView }): JSX.Element => {
       | "contactme"
       | ""
   ) => {
-    scrollIntoView(id);
+    setOpen(false);
+    const interval = setInterval(() => {
+      scrollIntoView(id);
+      clearInterval(interval);
+    }, 200);
   };
 
   const handleMenuOpen = () => {
-    open();
+    setOpen(true);
   };
 
   return (
@@ -90,12 +105,33 @@ const Header: NextPage<HeaderProps> = ({ scrollIntoView }): JSX.Element => {
         </div>
       </div>
       <div className="ml-auto block md:hidden">
-        <Button
-          onClick={handleMenuOpen}
-          className="ml-auto rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10"
-        >
-          Menu
-        </Button>
+        <DropdownMenu open={open}>
+          <DropdownMenuTrigger asChild>
+            <Button
+              onClick={handleMenuOpen}
+              className="ml-auto rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10"
+            >
+              Menu
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-auto" align="end">
+            <DropdownMenuGroup>
+              {navItems.map((item: NavItemWithIds, index: number) => {
+                return (
+                  <DropdownMenuItem
+                    key={index}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleRouteToSection(item.id);
+                    }}
+                  >
+                    {item.name}
+                  </DropdownMenuItem>
+                );
+              })}
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
       <div className="flex justify-end md:flex-1 md:justify-center">
         <nav className="hidden md:block">
@@ -115,32 +151,6 @@ const Header: NextPage<HeaderProps> = ({ scrollIntoView }): JSX.Element => {
           </ul>
         </nav>
       </div>
-      {/* <Modal
-        opened={opened}
-        onClose={close}
-        title="Navigation"
-        className="bg-opacity-0 "
-        styles={{
-          content: {
-            borderRadius: "1.5rem",
-            padding: "0% 5%",
-          },
-        }}
-      >
-        <div className="flex h-full flex-col gap-2 divide-y divide-zinc-100 dark:divide-zinc-100/5">
-          {navItems.map((item: NavItemWithIds, index: number) => {
-            return (
-              <p
-                className="block cursor-pointer py-2 text-base"
-                key={index}
-                onClick={() => handleRouteToSection(item.id)}
-              >
-                {item.name}
-              </p>
-            );
-          })}
-        </div>
-      </Modal> */}
     </div>
   );
 };
