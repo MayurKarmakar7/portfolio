@@ -74,7 +74,7 @@ const Introduction = forwardRef<
         <Link
           className="group -m-1 p-1"
           aria-label="Follow on GitHub"
-          href="https://github.com/MayurKarmakar7"
+          href="https://github.com/MayurKarmakar"
           id="github"
           target="_blank"
         >
