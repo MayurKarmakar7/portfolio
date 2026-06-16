@@ -5,13 +5,13 @@ const HeaderText: React.ForwardRefRenderFunction<
   React.HTMLAttributes<HTMLHeadingElement>
 > = ({ children, ...props }, ref) => {
   return (
-    <h1
+    <h2
       ref={ref}
-      className="break-after-all text-3xl font-bold tracking-wider text-zinc-800 dark:text-zinc-100"
+      className="section-heading"
       {...props}
     >
       {children}
-    </h1>
+    </h2>
   );
 };
 

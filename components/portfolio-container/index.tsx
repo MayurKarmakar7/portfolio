@@ -87,10 +87,10 @@ function Portfolio() {
   };
 
   return (
-    <div className="flex h-full flex-col gap-16 md:gap-24">
+    <div className="flex h-full w-full flex-col gap-8 pb-10 md:gap-12">
       <Header scrollIntoView={handleScrollIntoView} />
       <div
-        className="flex flex-1 h-full w-full flex-col items-center justify-center gap-32"
+        className="flex h-full w-full flex-1 flex-col items-center justify-center gap-16 md:gap-20"
         id="about"
       >
         <Introduction ref={introductionRef} />

@@ -2,9 +2,10 @@
 
 import { trpc } from "@/lib/trpc/client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { MailIcon, Send } from "lucide-react";
+import { MailIcon, MessageSquareText, Send } from "lucide-react";
 import { forwardRef, JSX } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 import HeaderText from "../header-text";
 import { Button } from "../ui/button";
@@ -18,7 +19,6 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import { toast } from "sonner";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -39,48 +39,89 @@ const ContactMe = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
 
     const sendMail = trpc.sendContactMail.useMutation();
     const saveContactDetails = trpc.saveContactMeDetails.useMutation();
+    const isPending = sendMail.isPending || saveContactDetails.isPending;
 
     async function handleAddVisitor(values: z.infer<typeof formSchema>) {
-      const [sendMailResult, saveDetailsResult] = await Promise.all([
-        sendMail.mutateAsync({
-          email: values.email,
-          fullName: values.name,
-          message: values.message,
-        }),
-        saveContactDetails.mutateAsync({
-          email: values.email,
-          fullName: values.name,
-          message: values.message,
-        }),
-      ]);
+      try {
+        const [sendMailResult, saveDetailsResult] = await Promise.all([
+          sendMail.mutateAsync({
+            email: values.email,
+            fullName: values.name,
+            message: values.message,
+          }),
+          saveContactDetails.mutateAsync({
+            email: values.email,
+            fullName: values.name,
+            message: values.message,
+          }),
+        ]);
 
-      const success = sendMailResult.success || saveDetailsResult.success;
+        const success = sendMailResult.success || saveDetailsResult.success;
 
-      if (success) {
-        toast.success("Message sent successfully!", {
-          description:
-            "Thank you for reaching out! I will get back to you soon.",
+        if (success) {
+          toast.success("Message sent successfully!", {
+            description:
+              "Thank you for reaching out! I will get back to you soon.",
+          });
+          form.reset();
+        }
+      } catch {
+        toast.error("Message could not be sent", {
+          description: "Please check your details and try again.",
         });
       }
-
-      form.reset();
     }
 
     return (
-      <div
-        className="mx-auto w-full max-w-full rounded-2xl border border-zinc-100 p-6 pt-2 dark:border-zinc-700/40 md:w-3/5"
+      <section
+        className="section-block w-full"
         id="contactme"
         ref={ref}
         {...props}
       >
-        <div className="flex h-full w-full flex-col items-start justify-center gap-8">
-          <div className="flex w-full flex-row justify-start gap-4">
-            <MailIcon className="h-10 w-10 transition" />
-            <HeaderText>Contact Me</HeaderText>
+        <div className="surface-card grid gap-8 p-5 md:p-6 lg:grid-cols-[0.86fr_1.14fr] lg:p-8">
+          <div className="flex flex-col justify-between gap-10">
+            <div>
+              <p className="section-kicker">Contact</p>
+              <HeaderText>Let&apos;s build something steady.</HeaderText>
+              <p className="section-copy mt-6 max-w-xl">
+                Send a short note about the AI workflow, product surface, or
+                document-heavy process you want to improve. I read for context
+                first, then respond with the next useful step.
+              </p>
+            </div>
+
+            <div className="grid gap-3">
+              <div className="flex items-start gap-3 rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
+                <MailIcon className="mt-1 h-5 w-5 text-teal-600 dark:text-teal-300" />
+                <div>
+                  <p className="text-sm font-black text-zinc-950 dark:text-zinc-50">
+                    Clear project notes help most
+                  </p>
+                  <p className="mt-1 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+                    Timeline, users, documents, stack, and the current review
+                    bottleneck are enough to start a useful conversation.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
+                <MessageSquareText className="mt-1 h-5 w-5 text-teal-600 dark:text-teal-300" />
+                <div>
+                  <p className="text-sm font-black text-zinc-950 dark:text-zinc-50">
+                    Best fit
+                  </p>
+                  <p className="mt-1 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+                    Applied AI applications, RAG and OCR workflows, React and
+                    Next.js interfaces, FastAPI services, and review dashboards.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
+
           <Form {...form}>
             <form
-              className="w-full space-y-5"
+              className="grid gap-5 rounded-xl border border-zinc-200 bg-white/70 p-4 dark:border-zinc-800 dark:bg-zinc-950/40 sm:p-5"
               onSubmit={form.handleSubmit(handleAddVisitor)}
             >
               <FormField
@@ -89,9 +130,13 @@ const ContactMe = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
                 render={({ field }) => {
                   return (
                     <FormItem>
-                      <FormLabel>Name</FormLabel>
+                      <FormLabel className="text-sm font-black">Name</FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder="eg: John Doe" />
+                        <Input
+                          {...field}
+                          placeholder="John Doe"
+                          className="h-11 rounded-xl"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -104,13 +149,14 @@ const ContactMe = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
                 render={({ field }) => {
                   return (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel className="text-sm font-black">Email</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
                           type="email"
                           required
-                          placeholder="eg: your@email.com"
+                          placeholder="you@example.com"
+                          className="h-11 rounded-xl"
                         />
                       </FormControl>
                       <FormMessage />
@@ -124,13 +170,15 @@ const ContactMe = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
                 render={({ field }) => {
                   return (
                     <FormItem>
-                      <FormLabel>Message</FormLabel>
+                      <FormLabel className="text-sm font-black">
+                        Message
+                      </FormLabel>
                       <FormControl>
                         <Textarea
                           {...field}
-                          placeholder="Write your message here..."
+                          placeholder="Tell me what you are building..."
                           rows={8}
-                          className="resize-none"
+                          className="resize-none rounded-xl"
                         />
                       </FormControl>
                       <FormMessage />
@@ -138,22 +186,20 @@ const ContactMe = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
                   );
                 }}
               />
-              <div className="w-full">
-                <Button
-                  type="submit"
-                  variant={"default"}
-                  className="w-full"
-                  disabled={sendMail.isPending}
-                  loading={sendMail.isPending}
-                >
-                  <Send />
-                  Send Message
-                </Button>
-              </div>
+              <Button
+                type="submit"
+                variant={"default"}
+                className="h-11 w-full rounded-xl bg-zinc-950 text-sm font-extrabold text-white hover:bg-teal-700 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-teal-200"
+                disabled={isPending}
+                loading={isPending}
+              >
+                <Send />
+                Send message
+              </Button>
             </form>
           </Form>
         </div>
-      </div>
+      </section>
     );
   }
 );

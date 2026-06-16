@@ -1,208 +1,207 @@
-import { forwardRef } from "react";
-
+import {
+  Blocks,
+  BrainCircuit,
+  CloudCog,
+  Database,
+  Layers3,
+  Radio,
+} from "lucide-react";
 import Image from "next/image";
+import { forwardRef, type ElementType } from "react";
 import HeaderText from "../header-text";
 import { TooltipWrapper } from "../tooltip-wrapper";
-
-type ImageContainersProps = {
-  imageUrl: string;
-  id: string;
-  name: string;
-};
 
 type SkillSet = {
   id: string;
   name: string;
-  imageUrl: string;
+  imageUrl?: string;
 };
 
-type ImageContainersCombinedProps = ImageContainersProps &
-  React.HTMLAttributes<HTMLDivElement>;
+type SkillGroup = {
+  title: string;
+  description: string;
+  icon: ElementType;
+  skills: SkillSet[];
+};
+
+const skillGroups: SkillGroup[] = [
+  {
+    title: "Applied AI workflows",
+    description:
+      "Structured LLM pipelines, document extraction, RAG, and review experiences with source-level traceability.",
+    icon: BrainCircuit,
+    skills: [
+      { id: "azure-openai", name: "Azure OpenAI" },
+      { id: "gpt-41", name: "GPT-4.1" },
+      { id: "content-understanding", name: "Azure Content Understanding" },
+      { id: "ocr", name: "OCR" },
+      { id: "azure-ai-search", name: "Azure AI Search" },
+      { id: "rag", name: "RAG" },
+    ],
+  },
+  {
+    title: "Full-stack architecture",
+    description:
+      "Typed product surfaces, API boundaries, persistence, and deployment-ready backend services.",
+    icon: Database,
+    skills: [
+      { id: "next", imageUrl: "/logos/nextjs.webp", name: "Next.js" },
+      { id: "react", imageUrl: "/logos/react.png", name: "React" },
+      { id: "fastapi", name: "FastAPI" },
+      { id: "node", imageUrl: "/logos/nodejs.png", name: "Node.js" },
+      { id: "postgresql", name: "PostgreSQL" },
+      { id: "rest", name: "REST APIs" },
+    ],
+  },
+  {
+    title: "Frontend systems",
+    description:
+      "Component-driven development, state management, and performant interfaces for complex workflows.",
+    icon: Layers3,
+    skills: [
+      { id: "redux", imageUrl: "/logos/redux.png", name: "Redux" },
+      { id: "zustand", imageUrl: "/logos/zustand.png", name: "Zustand" },
+      { id: "tanstack-query", imageUrl: "/logos/reactQuery.png", name: "TanStack Query" },
+      { id: "tailwind", imageUrl: "/logos/tailwind.webp", name: "Tailwind CSS" },
+      { id: "shadcn", imageUrl: "/logos/shadcn.png", name: "Shadcn" },
+      { id: "framemotion", imageUrl: "/logos/framerMotion.png", name: "Framer Motion" },
+    ],
+  },
+  {
+    title: "Realtime and integrations",
+    description:
+      "Live exam monitoring, communication flows, payments, auth, and third-party collaboration tools.",
+    icon: Radio,
+    skills: [
+      { id: "webrtc", imageUrl: "/logos/webrtc.png", name: "WebRTC" },
+      { id: "socketio", imageUrl: "/logos/socketIo.png", name: "Socket.IO" },
+      { id: "openvidu", name: "OpenVidu" },
+      { id: "jitsi", name: "Jitsi" },
+      { id: "zoom", name: "Zoom" },
+      { id: "clerk", name: "Clerk" },
+      { id: "stripe", name: "Stripe" },
+      { id: "paypal", name: "PayPal" },
+    ],
+  },
+  {
+    title: "Cloud and delivery",
+    description:
+      "CI/CD, containers, Azure hosting, and database platforms for shipping full-stack AI applications.",
+    icon: CloudCog,
+    skills: [
+      { id: "docker", name: "Docker" },
+      { id: "github-actions", name: "GitHub Actions" },
+      { id: "azure-app-service", name: "Azure App Service" },
+      { id: "azure-static-web-apps", name: "Azure Static Web Apps" },
+      { id: "vercel", name: "Vercel" },
+      { id: "supabase", name: "Supabase" },
+      { id: "neon", name: "Neon" },
+      { id: "turso", name: "Turso" },
+    ],
+  },
+  {
+    title: "Data and ORMs",
+    description:
+      "Practical data modeling, persistence, and review screens that keep AI output auditable.",
+    icon: Blocks,
+    skills: [
+      { id: "drizzle", imageUrl: "/logos/drizzle.jpg", name: "Drizzle ORM" },
+      { id: "prisma", imageUrl: "/logos/prisma.png", name: "Prisma ORM" },
+      { id: "trpc", imageUrl: "/logos/trpc.png", name: "tRPC" },
+      { id: "python", imageUrl: "/logos/python.png", name: "Python" },
+      { id: "django", imageUrl: "/logos/djangoRF.png", name: "Django REST" },
+      { id: "pandas", imageUrl: "/logos/pandas.png", name: "Pandas" },
+    ],
+  },
+];
+
+function getInitials(name: string) {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
+}
 
 const Skills = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   (props, ref) => {
-    const others: SkillSet[] = [
-      { id: "framemotion", imageUrl: "/logos/framerMotion.png", name: "Framer Motion" },
-      { id: "socketio", imageUrl: "/logos/socketIo.png", name: "Socket.IO" },
-      { id: "trpc", imageUrl: "/logos/trpc.png", name: "tRPC" },
-      { id: "webrtc", imageUrl: "/logos/webrtc.png", name: "WebRTC" },
-    ];
-
-    const frontEndTechs: SkillSet[] = [
-      { id: "react", imageUrl: "/logos/react.png", name: "React" },
-    ];
-
-    const backEndTechs: SkillSet[] = [
-      { id: "next", imageUrl: "/logos/nextjs.webp", name: "Next.js" },
-      { id: "node", imageUrl: "/logos/nodejs.png", name: "Node.js" },
-    ];
-
-    const uiComponentTechs: SkillSet[] = [
-      { id: "materialui", imageUrl: "/logos/materialui.png", name: "Material UI" },
-      { id: "mantine", imageUrl: "/logos/mantine.png", name: "Mantine" },
-      { id: "antd", imageUrl: "/logos/antd.png", name: "Ant Design" },
-      { id: "shadcn", imageUrl: "/logos/shadcn.png", name: "Shadcn" },
-    ];
-
-    const cssFramwork: SkillSet[] = [
-      { id: "tailwind", imageUrl: "/logos/tailwind.webp", name: "Tailwind CSS" },
-    ];
-
     return (
-      <div
-        className="flex flex-col flex-grow w-full gap-8 pt-2"
+      <section
+        className="section-block flex w-full flex-col gap-8"
         id="skills"
         ref={ref}
         {...props}
       >
-        <div className="flex h-full w-full items-center justify-start gap-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            xlinkActuate="http://www.w3.org/1999/xlink"
-            version="1.1"
-            id="Capa_1"
-            viewBox="0 0 290 290"
-            xmlSpace="preserve"
-            className="h-10 w-10 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300"
-          >
-            <path d="M285.857,52.128l-42.557,42.557c-3.887,3.887-10.184,3.887-14.072,0l-33.914-33.914c-3.887-3.887-3.887-10.186,0-14.071  l42.557-42.556c-26.965-9.211-58.012-3.066-79.518,18.441c-22.459,22.457-28.162,55.313-17.129,83.063l-45.361,45.359  c-25.279-9.078-54.639-3.505-74.889,16.747c-27.967,27.966-27.965,73.308,0,101.271c27.961,27.964,73.303,27.966,101.27,0  c20.252-20.253,25.826-49.614,16.748-74.893l45.359-45.359c27.75,11.032,60.607,5.33,83.065-17.127  C288.922,110.141,295.068,79.095,285.857,52.128z M99.793,246.573L61.291,256.89l-28.182-28.181l10.318-38.501l38.5-10.318  l28.184,28.182L99.793,246.573z" />
-          </svg>
-          <HeaderText id="skillHeader">Skills</HeaderText>
+        <div className="grid gap-5 lg:grid-cols-[0.72fr_1fr] lg:items-end">
+          <div>
+            <p className="section-kicker">Capabilities</p>
+            <HeaderText id="skillHeader">Skills</HeaderText>
+          </div>
+          <p className="section-copy max-w-3xl lg:justify-self-end">
+            I use this stack to build applied AI products end to end: document
+            ingestion, OCR, RAG retrieval, review dashboards, typed APIs, and
+            responsive interfaces that make AI output inspectable.
+          </p>
         </div>
-        <div className="max-w-full">
-          <div className="mr-auto w-full md:w-4/5">
-            <p
-              className="h-hull w-full break-before-all text-left text-base text-zinc-600 dark:text-zinc-400"
-              id="slogan"
-            >
-              With these skill sets, I have been nailing down the creation of
-              dynamic and responsive user interfaces, seamlessly integrating state
-              management, and optimizing performance for an enhanced user
-              experience in my React.js projects.
-            </p>
-          </div>
+
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3" id="techcontainer">
+          {skillGroups.map((group) => {
+            const Icon = group.icon;
+
+            return (
+              <article
+                className="hairline-card group flex min-h-[17rem] flex-col justify-between p-5 transition duration-300 hover:-translate-y-1 hover:border-teal-500/40"
+                key={group.title}
+              >
+                <div>
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-500/10 text-teal-700 transition group-hover:bg-teal-500 group-hover:text-white dark:text-teal-300">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <span className="rounded-full border border-zinc-200 px-2.5 py-1 text-xs font-bold text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
+                      {group.skills.length} tools
+                    </span>
+                  </div>
+                  <h3 className="mt-5 text-xl font-black text-zinc-950 dark:text-zinc-50">
+                    {group.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+                    {group.description}
+                  </p>
+                </div>
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {group.skills.map((tech) => (
+                    <TooltipWrapper value={tech.name} key={tech.id}>
+                      <span className="tech-chip">
+                        {tech.imageUrl ? (
+                          <Image
+                            width={24}
+                            height={24}
+                            className="h-6 w-6 rounded-full object-cover"
+                            src={tech.imageUrl}
+                            alt=""
+                          />
+                        ) : (
+                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-teal-500/10 text-[0.6rem] font-black text-teal-700 dark:text-teal-300">
+                            {getInitials(tech.name)}
+                          </span>
+                        )}
+                        {tech.name}
+                      </span>
+                    </TooltipWrapper>
+                  ))}
+                </div>
+              </article>
+            );
+          })}
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3" id="techcontainer">
-          {/* UI Libraries */}
-          <div className="flex h-full w-full flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40 md:w-auto" id="uitech">
-            <div className="max-w-full border-l-green-500">
-              <div className="w-36">
-                <h2 className="text-base font-semibold tracking-wider text-zinc-800 dark:text-zinc-100">UI Libraries</h2>
-              </div>
-            </div>
-            <div className="flex w-full max-w-full flex-row flex-wrap gap-4">
-              {frontEndTechs.map((tech: SkillSet) => (
-                <ImageContainers
-                  imageUrl={tech.imageUrl}
-                  id={tech.id}
-                  name={tech.name}
-                  key={tech.id}
-                />
-              ))}
-            </div>
-          </div>
-          {/* UI Component Libraries */}
-          <div className="flex h-full w-full flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40 md:w-auto" id="uicomptech">
-            <div className="max-w-full border-l-green-500">
-              <div className="w-auto">
-                <h2 className="text-base font-semibold tracking-wider text-zinc-800 dark:text-zinc-100">UI Component Libraries</h2>
-              </div>
-            </div>
-            <div className="flex w-full flex-row flex-wrap justify-start gap-4">
-              {uiComponentTechs.map((tech: SkillSet) => (
-                <ImageContainers
-                  imageUrl={tech.imageUrl}
-                  id={tech.id}
-                  name={tech.name}
-                  key={tech.id}
-                />
-              ))}
-            </div>
-          </div>
-          {/* CSS Frameworks */}
-          <div className="flex h-full w-full flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40 md:w-auto" id="cssframework">
-            <div className="max-w-full border-l-green-500">
-              <div className="w-auto">
-                <h2 className="text-base font-semibold tracking-wider text-zinc-800 dark:text-zinc-100">CSS Frameworks</h2>
-              </div>
-            </div>
-            <div className="flex w-full flex-row flex-wrap justify-start gap-4">
-              {cssFramwork.map((tech: SkillSet) => (
-                <ImageContainers
-                  imageUrl={tech.imageUrl}
-                  id={tech.id}
-                  name={tech.name}
-                  key={tech.id}
-                />
-              ))}
-            </div>
-          </div>
-          {/* Backend Techs */}
-          <div className="flex h-full w-full flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40 md:w-auto" id="backendtech">
-            <div className="max-w-full border-l-green-500">
-              <div className="w-auto">
-                <h2 className="text-base font-semibold tracking-wider text-zinc-800 dark:text-zinc-100">Backend Techs</h2>
-              </div>
-            </div>
-            <div className="flex w-full flex-row flex-wrap justify-start gap-4">
-              {backEndTechs.map((tech: SkillSet) => (
-                <ImageContainers
-                  imageUrl={tech.imageUrl}
-                  id={tech.id}
-                  name={tech.name}
-                  key={tech.id}
-                />
-              ))}
-            </div>
-          </div>
-          {/* Others */}
-          <div className="flex h-full w-full flex-col items-start justify-start gap-4 rounded-2xl border border-zinc-100 p-6 hover:rounded-xl hover:bg-zinc-800 dark:border-zinc-700/40 md:w-auto" id="others">
-            <div className="max-w-full border-l-green-500">
-              <div className="w-auto">
-                <h2 className="text-base font-semibold tracking-wider text-zinc-800 dark:text-zinc-100">Others</h2>
-              </div>
-            </div>
-            <div className="flex w-full flex-row flex-wrap justify-start gap-4">
-              {others.map((tech: SkillSet) => (
-                <ImageContainers
-                  imageUrl={tech.imageUrl}
-                  id={tech.id}
-                  name={tech.name}
-                  key={tech.id}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+      </section>
     );
   }
 );
 Skills.displayName = "Skills";
-
-const ImageContainers = forwardRef<HTMLDivElement, ImageContainersCombinedProps>(
-  ({ imageUrl, name, id, ...rest }, ref) => {
-    return (
-      <div
-        className="h-12 w-12 overflow-hidden rounded-full"
-        id={id}
-        ref={ref}
-        {...rest}
-      >
-        <TooltipWrapper value={name}>
-          <Image
-            width={48}
-            height={48}
-            className="w-full h-full object-cover border-2 rounded-full p-0.5 border-zinc-200 dark:border-zinc-700/40"
-            src={imageUrl}
-            alt={name}
-          />
-        </TooltipWrapper>
-      </div>
-    );
-  }
-);
-
-ImageContainers.displayName = "ImageContainers";
 
 export default Skills;
