@@ -3,6 +3,7 @@ import {
   BrainCircuit,
   BriefcaseBusiness,
   CircleCheck,
+  ClipboardCheck,
   FileText,
   HeartPulse,
   Radio,
@@ -23,19 +24,34 @@ type ExperienceDescriptionProps = {
 const experiences: ExperienceDescriptionProps[] = [
   {
     header:
-      "A CGMP regulatory intelligence and document-review platform for regulated quality workflows.",
+      "A CGMP regulatory intelligence platform for turning FDA warning-letter signals into searchable inspection insight.",
     responsibilities: [
       "Designed and built AuditPulse with Next.js, FastAPI, PostgreSQL, Playwright, and GPT-4.1 through Azure OpenAI.",
       "Developed an FDA warning-letter pipeline for scraping, preparation, structured LLM classification, severity scoring, persistence, and retries.",
       "Delivered regulatory dashboards with multidimensional filters, heatmaps, severity benchmarking, and time-series trend analysis.",
-      "Built batch-record review using Azure Content Understanding OCR to extract process parameters, detect missing fields, and score data integrity.",
-      "Implemented Azure AI Search chunking, indexing, vector retrieval, source bounding boxes, deviation workflows, audit trails, Docker, and GitHub Actions delivery.",
+      "Added review flows that connected model classifications back to warning-letter source context for faster quality inspection.",
+      "Packaged the application for repeatable delivery with Docker, GitHub Actions, and Azure OpenAI configuration.",
     ],
-    name: "zipp.ai / AuditPulse",
+    name: "AuditPulse",
     domain: "Applied AI regulatory intelligence",
-    period: "Oct 2025 - May 2026",
-    signal: "GxP RAG and OCR",
+    period: "zipp.ai ~ Oct 2025 - May 2026",
+    signal: "FDA warning letters",
     icon: BrainCircuit,
+  },
+  {
+    header:
+      "An AI-assisted batch-record review workflow for extracting production parameters and making GxP quality findings traceable.",
+    responsibilities: [
+      "Built Azure Content Understanding OCR flows for parsing batch-record PDFs and extracting structured process parameters.",
+      "Implemented missing-field checks, data-integrity scoring, and deviation surfacing for reviewer follow-up.",
+      "Connected findings to PDF source evidence with bounding boxes so quality reviewers could inspect the original record quickly.",
+      "Delivered audit trails and operational workflows that made review activity easier to trace across document versions.",
+    ],
+    name: "Batch Record Review",
+    domain: "GxP document intelligence",
+    period: "zipp.ai ~ Oct 2025 - May 2026",
+    signal: "OCR and traceability",
+    icon: ClipboardCheck,
   },
   {
     header:
@@ -94,7 +110,7 @@ const experiences: ExperienceDescriptionProps[] = [
     name: "CarelogiQ",
     domain: "Healthcare analytics",
     period: "Wisteli - 2021 to 2023",
-    signal: "Clinical dashboards",
+    signal: "Clinical dashboards & Mobile App",
     icon: HeartPulse,
   },
 ];

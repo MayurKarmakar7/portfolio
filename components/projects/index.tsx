@@ -67,7 +67,7 @@ const projectDetails: ProjectDetails[] = [
       { name: "Scikit-learn", imageUrl: "/logos/scikit.png" },
     ],
     logo: "/logos/cowinHistory.jpg",
-    link: "https://github.com/MayurKarmakar7/cowinhistory.git",
+    link: "https://github.com/MayurKarmakar/cowin-history.git",
     liveLink: null,
   },
   {
@@ -90,7 +90,7 @@ const projectDetails: ProjectDetails[] = [
       { name: "MySQL", imageUrl: "/logos/mySQL.png" },
     ],
     logo: "/logos/collegePapers.png",
-    link: "https://github.com/MayurKarmakar7/collegepapers.git",
+    link: "https://github.com/MayurKarmakar/collegepapers.git",
     liveLink: null,
   },
   {

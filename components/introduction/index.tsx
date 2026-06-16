@@ -49,14 +49,14 @@ const Introduction = forwardRef<
           4+ years building full-stack applied AI products
         </div>
 
-        <h1 className="reveal-up delay-100 mt-6 max-w-5xl text-[clamp(2.5rem,7vw,5.6rem)] font-black leading-[0.94] tracking-normal text-zinc-950 dark:text-zinc-50">
-          Applied AI systems for regulated product workflows.
+        <h1 className="reveal-up delay-100 mt-6 max-w-4xl text-[clamp(2.5rem,6.4vw,5.1rem)] font-black leading-[0.95] tracking-normal text-zinc-950 dark:text-zinc-50">
+          Full-stack applied AI engineer.
         </h1>
 
         <p className="reveal-up delay-200 mt-7 max-w-3xl text-base leading-8 text-zinc-600 dark:text-zinc-400 sm:text-lg">
-          I am Mayur Karmakar, a full-stack engineer building React, Next.js,
-          FastAPI, PostgreSQL, and Azure AI applications for document-heavy
-          workflows where accuracy, traceability, and usable review matter.
+          I am Mayur Karmakar, building production web apps and document
+          intelligence workflows with React, Next.js, FastAPI, PostgreSQL, and
+          Azure AI, where accuracy, traceability, and usable review matter.
         </p>
 
         <div className="reveal-up delay-300 mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
